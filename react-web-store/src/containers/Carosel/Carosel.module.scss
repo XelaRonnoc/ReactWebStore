@@ -1,0 +1,18 @@
+.Carosel {
+    overflow: hidden;
+
+    &_Inner {
+        white-space: nowrap;
+        transition: transform 0.3s;
+    }
+}
+
+.Controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    & button {
+        width: 100px;
+    }
+}

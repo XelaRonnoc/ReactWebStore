@@ -44,6 +44,20 @@ export const addProduct = async (someObj) => {
     //return true // return docRef
 };
 
+export const getProductById = async (id) => {
+    const docRef = doc(db, "video-games", id);
+    const docSnap = await getDoc(docRef);
+
+    console.log(docSnap.exists());
+    console.log(docSnap.data());
+
+    if (docSnap.exists()) {
+        return { id: docSnap.id, ...docSnap.data() };
+    } else {
+        throw new Error("Doc not found");
+    }
+};
+
 // just used to create some bare documents
 // const obj = {
 //     favourited: false,

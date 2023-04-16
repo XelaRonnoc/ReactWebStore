@@ -1,0 +1,17 @@
+.ProductCard {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 2px solid black;
+    width: 200px;
+    height: 400px;
+
+    &:hover {
+        box-shadow: 10px 10px 10px gray;
+    }
+
+    &_Image {
+        width: 200px;
+        height: 300px;
+    }
+}
