@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./componenets/Nav/Nav";
 import ProductPage from "./containers/ProductPage/ProductPage";
 import Carosel from "./containers/Carosel/Carosel";
+import CartInventoryProvider from "./context/CartInventoryProvider";
+import Cart from "./containers/Cart/Cart";
 
 function App() {
     console.log(getAllProducts());
@@ -23,21 +25,24 @@ function App() {
     // console.log(products);
     return (
         <div className="App">
-            <BrowserRouter>
-                <Nav />
-                <Routes>
-                    <Route
-                        path="/home"
-                        element={
-                            <>
-                                <Carosel products={products} />
-                                <ProductList products={products} />
-                            </>
-                        }
-                    />
-                    <Route path="/home/:id" element={<ProductPage />} />
-                </Routes>
-            </BrowserRouter>
+            <CartInventoryProvider>
+                <BrowserRouter>
+                    <Nav />
+                    <Routes>
+                        <Route
+                            path="/home"
+                            element={
+                                <>
+                                    <Carosel products={products} />
+                                    <ProductList products={products} />
+                                </>
+                            }
+                        />
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/home/:id" element={<ProductPage />} />
+                    </Routes>
+                </BrowserRouter>
+            </CartInventoryProvider>
         </div>
     );
 }
