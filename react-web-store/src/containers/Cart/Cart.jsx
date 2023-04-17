@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { getAllProducts } from "../../services/firebase/products";
 import ProductCard from "../../componenets/ProductCard/ProductCard";
+import CartCard from "../../componenets/CartCard/CartCard";
 
 const Cart = () => {
     const [products, setProducts] = useState(null);
@@ -28,12 +29,13 @@ const Cart = () => {
                 {products &&
                     products.map((prod) => {
                         return (
-                            <ProductCard
+                            <CartCard
                                 key={prod.id}
                                 productName={prod.name}
                                 image={prod.imageUrl}
                                 unitPrice={prod.unitPrice}
                                 id={prod.id}
+                                quantity={prod.quantity}
                             />
                         );
                     })}

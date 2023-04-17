@@ -10,7 +10,7 @@ import Cart from "./containers/Cart/Cart";
 import UpdateProvider, { UpdateContext } from "./context/UpdateProvider";
 
 function App() {
-    console.log(getAllProducts());
+    // console.log(getAllProducts());
     const [products, setProducts] = useState(null);
     const { updated } = useContext(UpdateContext);
 
