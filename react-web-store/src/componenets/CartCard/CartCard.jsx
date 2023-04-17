@@ -21,6 +21,7 @@ const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
         setFormValue(itemsOfType.length);
     };
 
+    // handles the changes in amounts well up to max and min, now up to figureing out how to store and send this stuff to the DB properly without it getting too jumbled, will take some thought and refactoring
     const handleChange = (e) => {
         const { value } = e.target;
         let changeInAmount = 0;
