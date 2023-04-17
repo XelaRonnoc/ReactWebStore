@@ -1,8 +1,11 @@
-import React from "react";
+import { useContext } from "react";
 import ProductCard from "../../componenets/ProductCard/ProductCard";
 import styles from "./ProductList.module.scss";
+import { UpdateContext } from "../../context/UpdateProvider";
 
 const ProductList = ({ products }) => {
+    const { update, updatePage } = useContext(UpdateContext);
+
     return (
         <div>
             <h1>Product List from firestore</h1>

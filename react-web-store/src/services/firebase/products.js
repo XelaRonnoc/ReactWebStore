@@ -65,6 +65,7 @@ export const incrementQuantity = async (id, num) => {
     await updateDoc(docRef, {
         quantity: increment(num),
     });
+    return "quantity incremented";
 };
 
 // just used to create some bare documents

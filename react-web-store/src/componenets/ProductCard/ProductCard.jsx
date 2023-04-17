@@ -10,7 +10,7 @@ const ProductCard = ({ productName, unitPrice, image, id }) => {
     };
     return (
         <div className={styles.ProductCard}>
-            <NavLink to={`/home/${id}`}>
+            <NavLink to={`/${id}`}>
                 <img className={styles.ProductCard_Image} src={image}></img>
                 <h3>{productName}</h3>
                 <p>${unitPrice}</p>

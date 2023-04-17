@@ -3,24 +3,30 @@ import { getProductById } from "../../services/firebase/products";
 import { useParams } from "react-router-dom";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { useContext } from "react";
+import { UpdateContext } from "../../context/UpdateProvider";
 
 const ProductPage = () => {
     const [product, setProduct] = useState(null);
-    const { updateCartInventory } = useContext(CartInventoryContext);
-
+    const { cartInventory, updateCartInventory } =
+        useContext(CartInventoryContext);
+    const { updated, updatePage } = useContext(UpdateContext);
     const { id } = useParams();
 
-    const addToCart = () => {
-        updateCartInventory(id);
+    const addToCart = async () => {
+        await updateCartInventory(id);
+        updatePage();
     };
 
     useEffect(() => {
         const wrapper = async () => {
             const data = await getProductById(id);
             setProduct(data);
+            console.log("update page");
         };
         wrapper();
-    }, [id]);
+    }, [id, updated]);
+
+    console.log(product, "product");
     return (
         product && (
             <div>
