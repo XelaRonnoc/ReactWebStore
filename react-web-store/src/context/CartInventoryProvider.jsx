@@ -40,7 +40,18 @@ const CartInventoryProvider = ({ children }) => {
         }
         cartHolder[indexToUpdate].quantityInCart += incrementBy;
         setCartInventory(cartHolder);
-        return incrementQuantity(productId, -incrementBy);
+        // return incrementQuantity(productId, -incrementBy);
+    };
+
+    const purchaseItemsInCart = async () => {
+        const itemsInCart = cartInventory.filter(
+            (item) => item.quantityInCart > 0
+        );
+
+        itemsInCart.forEach((item) => {
+            incrementQuantity(item.productsObj.id, -item.quantityInCart);
+        });
+        console.log("Purchase complete");
     };
 
     const getItemById = (id) => {
@@ -67,6 +78,7 @@ const CartInventoryProvider = ({ children }) => {
         initialCartInventory,
         updateCartInventory,
         getItemById,
+        purchaseItemsInCart,
     };
 
     return (

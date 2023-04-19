@@ -11,6 +11,7 @@ const CartCard = ({ productName, unitPrice, image, id }) => {
         useContext(CartInventoryContext);
     const [formValue, setFormValue] = useState(-1);
     const [changeInAmount, setChangeInAmount] = useState(0);
+    const [currentProduct, setCurrentProduct] = useState({});
 
     const setFormValueInitial = () => {
         const curItem = getItemById(id);
@@ -26,7 +27,7 @@ const CartCard = ({ productName, unitPrice, image, id }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const currentProduct = await getProductById(id);
+        // const currentProduct = await getProductById(id);
         const currentItem = getItemById(id);
         console.log(currentProduct.quantity, "quantity");
 
@@ -34,10 +35,13 @@ const CartCard = ({ productName, unitPrice, image, id }) => {
             setChangeInAmount(-currentItem.quantityInCart);
             updateCartInventory(id, -currentItem.quantityInCart);
             setFormValue(0);
-        } else if (currentProduct.quantity - changeInAmount < 0) {
+        } else if (currentProduct.quantity - formValue <= 0) {
             setChangeInAmount(currentProduct.quantity);
             setFormValue(currentProduct.quantity);
-            updateCartInventory(id, currentProduct.quantity);
+            updateCartInventory(
+                id,
+                currentProduct.quantity - currentItem.quantityInCart
+            );
         } else {
             updateCartInventory(id, changeInAmount);
         }
@@ -47,6 +51,10 @@ const CartCard = ({ productName, unitPrice, image, id }) => {
     console.log(formValue, "forms current val");
 
     useEffect(() => {
+        const wrapper = async () => {
+            setCurrentProduct(await getProductById(id));
+        };
+        wrapper();
         setFormValueInitial();
     }, []);
 

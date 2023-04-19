@@ -6,8 +6,13 @@ import CartCard from "../../componenets/CartCard/CartCard";
 
 const Cart = () => {
     const [products, setProducts] = useState(null);
-    const { updateCartInventory, cartInventory } =
+    const { updateCartInventory, cartInventory, purchaseItemsInCart } =
         useContext(CartInventoryContext);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        purchaseItemsInCart();
+    };
 
     useEffect(() => {
         const wrapper = async () => {
@@ -38,6 +43,9 @@ const Cart = () => {
                         );
                     })}
             </div>
+            <form onSubmit={handleSubmit}>
+                <input type="submit" />
+            </form>
         </div>
     );
 };
