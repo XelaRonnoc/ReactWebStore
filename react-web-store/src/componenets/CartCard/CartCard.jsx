@@ -6,50 +6,32 @@ import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { useEffect } from "react";
 
 const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
-    const [inCartQuantity, setInCartQuantity] = useState(-1);
-    const { cartInventory, updateCartInventory } =
+    const { cartInventory, updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
     const [formValue, setFormValue] = useState(-1);
     const [changeInAmount, setChangeInAmount] = useState(0);
 
-    const setAmountInCart = () => {
-        const curItem = cartInventory.find((item) => {
-            if (item.productsObj.id === id) {
-                return item;
-            }
-        });
-
-        setInCartQuantity(curItem.quantityInCart);
+    const setFormValueInitial = () => {
+        const curItem = getItemById(id);
         setFormValue(curItem.quantityInCart);
     };
 
     // handles the changes in amounts well up to max and min, now up to figureing out how to store and send this stuff to the DB properly without it getting too jumbled, will take some thought and refactoring
     const handleChange = (e) => {
+        setChangeInAmount(e.target.value - getItemById(id).quantityInCart);
         setFormValue(e.target.value);
-        // setInCartQuantity(inCartQuantity + changeInAmount)
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formValue >= 0 && formValue <= quantity) {
-            setChangeInAmount(formValue - inCartQuantity);
-        } else if (formValue < 0) {
-            setChangeInAmount(-inCartQuantity);
-            setFormValue(0);
-        } else if (formValue > quantity) {
-            setChangeInAmount(quantity - inCartQuantity);
-            setFormValue(quantity);
-        }
-
-        await updateCartInventory(id, -changeInAmount);
-        setAmountInCart();
+        await updateCartInventory(id, changeInAmount);
     };
-    console.log(inCartQuantity, "In Cart Quantity");
     console.log(changeInAmount, "Change in amount");
     console.log(cartInventory, "Cart Inventory");
+    console.log(formValue, "forms current val");
 
     useEffect(() => {
-        setAmountInCart();
+        setFormValueInitial();
     }, []);
 
     useEffect(() => {});
@@ -68,7 +50,6 @@ const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
                     <input
                         onChange={handleChange}
                         type="number"
-                        min={0}
                         value={formValue}
                     />
                     <input type="submit" value={"update cart"} />

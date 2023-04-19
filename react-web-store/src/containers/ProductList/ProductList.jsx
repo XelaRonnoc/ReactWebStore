@@ -10,6 +10,7 @@ const ProductList = ({ products }) => {
 
     useEffect(() => {
         initialCartInventory(products);
+        console.log("setting cart inventory");
     }, [products]);
 
     return (

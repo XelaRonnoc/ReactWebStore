@@ -7,6 +7,7 @@ export const CartInventoryContext = createContext();
 
 const CartInventoryProvider = ({ children }) => {
     const [cartInventory, setCartInventory] = useState([]);
+    const [initalSetupComplete, setInitialSetupComplete] = useState(false);
 
     const updateCartInventory = (productId, incrementBy) => {
         //     const incrementNum = parseInt(incrementBy);
@@ -42,16 +43,31 @@ const CartInventoryProvider = ({ children }) => {
         return incrementQuantity(productId, -incrementBy);
     };
 
+    const getItemById = (id) => {
+        const result = cartInventory.find((item) => {
+            if (item.productsObj.id === id) {
+                return item;
+            }
+        });
+        return result;
+    };
+
     const initialCartInventory = (products) => {
-        if (products) {
+        if (products && !initalSetupComplete) {
             const productCart = products.map((item) => {
                 return { productsObj: item, quantityInCart: 0 };
             });
             setCartInventory(productCart);
+            setInitialSetupComplete(true);
         }
     };
 
-    const data = { cartInventory, initialCartInventory, updateCartInventory };
+    const data = {
+        cartInventory,
+        initialCartInventory,
+        updateCartInventory,
+        getItemById,
+    };
 
     return (
         <CartInventoryContext.Provider value={data}>
