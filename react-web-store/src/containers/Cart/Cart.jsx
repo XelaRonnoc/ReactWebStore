@@ -34,7 +34,6 @@ const Cart = () => {
                                 image={prod.productsObj.imageUrl}
                                 unitPrice={prod.productsObj.unitPrice}
                                 id={prod.productsObj.id}
-                                quantity={prod.productsObj.quantity}
                             />
                         );
                     })}

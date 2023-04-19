@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useContext } from "react";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { useEffect } from "react";
+import { getProductById } from "../../services/firebase/products";
 
-const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
+const CartCard = ({ productName, unitPrice, image, id }) => {
     const { cartInventory, updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
     const [formValue, setFormValue] = useState(-1);
@@ -18,13 +19,28 @@ const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
 
     // handles the changes in amounts well up to max and min, now up to figureing out how to store and send this stuff to the DB properly without it getting too jumbled, will take some thought and refactoring
     const handleChange = (e) => {
-        setChangeInAmount(e.target.value - getItemById(id).quantityInCart);
         setFormValue(e.target.value);
+        const currentChange = e.target.value - getItemById(id).quantityInCart;
+        setChangeInAmount(currentChange);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await updateCartInventory(id, changeInAmount);
+        const currentProduct = await getProductById(id);
+        const currentItem = getItemById(id);
+        console.log(currentProduct.quantity, "quantity");
+
+        if (currentItem.quantityInCart + changeInAmount < 0) {
+            setChangeInAmount(-currentItem.quantityInCart);
+            updateCartInventory(id, -currentItem.quantityInCart);
+            setFormValue(0);
+        } else if (currentProduct.quantity - changeInAmount < 0) {
+            setChangeInAmount(currentProduct.quantity);
+            setFormValue(currentProduct.quantity);
+            updateCartInventory(id, currentProduct.quantity);
+        } else {
+            updateCartInventory(id, changeInAmount);
+        }
     };
     console.log(changeInAmount, "Change in amount");
     console.log(cartInventory, "Cart Inventory");
