@@ -13,14 +13,14 @@ const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
     const [changeInAmount, setChangeInAmount] = useState(0);
 
     const setAmountInCart = () => {
-        const itemsOfType = cartInventory.filter((item) => {
-            if (item === id) {
+        const curItem = cartInventory.find((item) => {
+            if (item.productsObj.id === id) {
                 return item;
             }
         });
 
-        setInCartQuantity(itemsOfType.length);
-        setFormValue(itemsOfType.length);
+        setInCartQuantity(curItem.quantityInCart);
+        setFormValue(curItem.quantityInCart);
     };
 
     // handles the changes in amounts well up to max and min, now up to figureing out how to store and send this stuff to the DB properly without it getting too jumbled, will take some thought and refactoring
