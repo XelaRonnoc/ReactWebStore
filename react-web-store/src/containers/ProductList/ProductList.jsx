@@ -1,10 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ProductCard from "../../componenets/ProductCard/ProductCard";
 import styles from "./ProductList.module.scss";
 import { UpdateContext } from "../../context/UpdateProvider";
+import { CartInventoryContext } from "../../context/CartInventoryProvider";
 
 const ProductList = ({ products }) => {
     const { update, updatePage } = useContext(UpdateContext);
+    const { initialCartInventory } = useContext(CartInventoryContext);
+
+    useEffect(() => {
+        initialCartInventory(products);
+    }, [products]);
 
     return (
         <div>

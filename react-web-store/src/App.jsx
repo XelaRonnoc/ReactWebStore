@@ -5,7 +5,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./componenets/Nav/Nav";
 import ProductPage from "./containers/ProductPage/ProductPage";
 import Carosel from "./containers/Carosel/Carosel";
-import CartInventoryProvider from "./context/CartInventoryProvider";
+import CartInventoryProvider, {
+    CartInventoryContext,
+} from "./context/CartInventoryProvider";
 import Cart from "./containers/Cart/Cart";
 import UpdateProvider, { UpdateContext } from "./context/UpdateProvider";
 
@@ -22,12 +24,16 @@ function App() {
         wrapper();
     }, [updated]);
 
+    // useEffect(() => {
+    //     initialCartInventory(products);
+    // }, [products]);
+
     // console.log(products);
     return (
         <BrowserRouter>
-            <UpdateProvider>
-                <div className="App">
-                    <CartInventoryProvider>
+            <CartInventoryProvider>
+                <UpdateProvider>
+                    <div className="App">
                         <Nav />
                         <Routes>
                             <Route
@@ -42,9 +48,9 @@ function App() {
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/:id" element={<ProductPage />} />
                         </Routes>
-                    </CartInventoryProvider>
-                </div>
-            </UpdateProvider>
+                    </div>
+                </UpdateProvider>
+            </CartInventoryProvider>
         </BrowserRouter>
     );
 }

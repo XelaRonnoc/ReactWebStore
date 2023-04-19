@@ -15,13 +15,15 @@ const ProductPage = () => {
 
     const addToCart = async () => {
         if (product.quantity >= 1) {
-            setAvailable(true);
-            await updateCartInventory(id, -1);
+            const result = await updateCartInventory(id, 1);
+            const data = await getProductById(id);
+            setProduct(data);
+            setAvailable(data.quantity >= 1);
             updatePage();
-        } else {
-            setAvailable(false);
         }
     };
+
+    console.log(cartInventory);
 
     useEffect(() => {
         const wrapper = async () => {
@@ -30,7 +32,7 @@ const ProductPage = () => {
             setAvailable(data.quantity >= 1);
         };
         wrapper();
-    }, [id, updated]);
+    }, []);
 
     return (
         product && (

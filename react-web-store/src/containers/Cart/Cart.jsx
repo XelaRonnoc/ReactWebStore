@@ -11,10 +11,9 @@ const Cart = () => {
 
     useEffect(() => {
         const wrapper = async () => {
-            const allProds = await getAllProducts();
-            const inCart = allProds.filter((prod) => {
-                if (cartInventory.includes(prod.id)) {
-                    return prod;
+            const inCart = cartInventory.filter((obj) => {
+                if (obj.quantityInCart > 0) {
+                    return obj.productsObj;
                 }
             });
             setProducts(inCart);
@@ -30,12 +29,12 @@ const Cart = () => {
                     products.map((prod) => {
                         return (
                             <CartCard
-                                key={prod.id}
-                                productName={prod.name}
-                                image={prod.imageUrl}
-                                unitPrice={prod.unitPrice}
-                                id={prod.id}
-                                quantity={prod.quantity}
+                                key={prod.productsObj.id}
+                                productName={prod.productsObj.name}
+                                image={prod.productsObj.imageUrl}
+                                unitPrice={prod.productsObj.unitPrice}
+                                id={prod.productsObj.id}
+                                quantity={prod.productsObj.quantity}
                             />
                         );
                     })}
