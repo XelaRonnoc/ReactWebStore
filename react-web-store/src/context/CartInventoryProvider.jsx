@@ -10,28 +10,11 @@ const CartInventoryProvider = ({ children }) => {
     const [cartInventory, setCartInventory] = useState([]);
     const [initalSetupComplete, setInitialSetupComplete] = useState(false);
 
-    const updateCartInventory = (productId, incrementBy) => {
-        //     const incrementNum = parseInt(incrementBy);
-        //     const inventory = cartInventory;
-        //     if (incrementNum > 0) {
-        //         for (let i = incrementNum; i > 0; i--) {
-        //             const index = inventory.indexOf(productId);
-        //             inventory.splice(index, 1);
-        //         }
-        //     } else if (incrementNum <= 0) {
-        //         for (let i = incrementNum; i < 0; i++) {
-        //             inventory.push(productId);
-        //         }
-        //     }
-        //     setCartInventory(inventory);
-        //     return incrementQuantity(productId, incrementNum);
-        // console.log(`added ${product} to cart`);
-        // console.log(cartInventory);
-
+    const updateCartInventory = async (productId, incrementBy) => {
+        // const curQuantity = await getProductById(productId).quantity;
+        // // console.log(curQuantity);
+        // if (curQuantity > incrementBy) {
         const cartHolder = cartInventory;
-        // const indexToUpdate = cartHolder.indexOf((obj) => {
-        //     return obj.productsObj.id === productId;
-        // });
         let indexToUpdate = -1;
         for (let i = 0; i < cartHolder.length; i++) {
             if (cartHolder[i].productsObj.id === productId) {
@@ -41,7 +24,7 @@ const CartInventoryProvider = ({ children }) => {
         }
         cartHolder[indexToUpdate].quantityInCart += incrementBy;
         setCartInventory(cartHolder);
-        // return incrementQuantity(productId, -incrementBy);
+        // }
     };
 
     const purchaseItemsInCart = async () => {

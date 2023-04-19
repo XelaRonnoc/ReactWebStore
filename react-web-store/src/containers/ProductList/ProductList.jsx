@@ -26,6 +26,7 @@ const ProductList = ({ products }) => {
                                 image={prod.imageUrl}
                                 unitPrice={prod.unitPrice}
                                 id={prod.id}
+                                quantity={prod.quantity}
                             />
                         );
                     })}
