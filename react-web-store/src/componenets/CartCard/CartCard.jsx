@@ -6,7 +6,7 @@ import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { useEffect } from "react";
 import { getProductById } from "../../services/firebase/products";
 
-const CartCard = ({ productName, unitPrice, image, id }) => {
+const CartCard = ({ productName, unitPrice, image, id, update }) => {
     const { cartInventory, updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
     const [formValue, setFormValue] = useState(-1);
@@ -56,7 +56,7 @@ const CartCard = ({ productName, unitPrice, image, id }) => {
         };
         wrapper();
         setFormValueInitial();
-    }, []);
+    }, [cartInventory, update]);
 
     useEffect(() => {});
     // console.log(inCartQuantity, "inCartQunatity");

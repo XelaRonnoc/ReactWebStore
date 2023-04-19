@@ -8,10 +8,12 @@ const Cart = () => {
     const [products, setProducts] = useState(null);
     const { updateCartInventory, cartInventory, purchaseItemsInCart } =
         useContext(CartInventoryContext);
+    const [updated, setUpdated] = useState(0);
 
-    const handleSubmit = (e) => {
+    const handleClick = (e) => {
         e.preventDefault();
         purchaseItemsInCart();
+        setUpdated(updated + 1);
     };
 
     useEffect(() => {
@@ -24,7 +26,7 @@ const Cart = () => {
             setProducts(inCart);
         };
         wrapper();
-    }, [cartInventory]);
+    }, [cartInventory, updated]);
 
     return (
         <div>
@@ -39,12 +41,13 @@ const Cart = () => {
                                 image={prod.productsObj.imageUrl}
                                 unitPrice={prod.productsObj.unitPrice}
                                 id={prod.productsObj.id}
+                                update={updated}
                             />
                         );
                     })}
             </div>
-            <form onSubmit={handleSubmit}>
-                <input type="submit" />
+            <form>
+                <button onClick={handleClick}>Purchase</button>
             </form>
         </div>
     );

@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import {
     incrementQuantity,
     getProductById,
+    getAllProducts,
 } from "../services/firebase/products";
 export const CartInventoryContext = createContext();
 
@@ -52,6 +53,8 @@ const CartInventoryProvider = ({ children }) => {
             incrementQuantity(item.productsObj.id, -item.quantityInCart);
         });
         console.log("Purchase complete");
+
+        cartInventory.forEach((item) => (item.quantityInCart = 0));
     };
 
     const getItemById = (id) => {
