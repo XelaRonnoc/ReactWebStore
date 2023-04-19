@@ -7,8 +7,10 @@ import { useEffect } from "react";
 
 const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
     const [inCartQuantity, setInCartQuantity] = useState(-1);
-    const { cartInventory } = useContext(CartInventoryContext);
+    const { cartInventory, updateCartInventory } =
+        useContext(CartInventoryContext);
     const [formValue, setFormValue] = useState(-1);
+    const [changeInAmount, setChangeInAmount] = useState(0);
 
     const setAmountInCart = () => {
         const itemsOfType = cartInventory.filter((item) => {
@@ -23,32 +25,34 @@ const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
 
     // handles the changes in amounts well up to max and min, now up to figureing out how to store and send this stuff to the DB properly without it getting too jumbled, will take some thought and refactoring
     const handleChange = (e) => {
-        const { value } = e.target;
-        let changeInAmount = 0;
-        if (e.target.value >= 0 && e.target.value <= quantity) {
-            setFormValue(value);
-            changeInAmount = value - inCartQuantity;
-            console.log(changeInAmount, "changeInAmount normal use");
-        } else if (e.target.value < 0) {
-            changeInAmount = -inCartQuantity;
-            setFormValue(0);
-            // setAmountInCart(0);
-            console.log(changeInAmount, "changeInAmount negative");
-        } else if (e.target.value > quantity) {
-            changeInAmount = quantity - inCartQuantity;
-            setFormValue(quantity);
-            // setAmountInCart(quantity);
-            console.log(changeInAmount, "changeInAmount more than available");
-        }
+        setFormValue(e.target.value);
         // setInCartQuantity(inCartQuantity + changeInAmount)
     };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (formValue >= 0 && formValue <= quantity) {
+            setChangeInAmount(formValue - inCartQuantity);
+        } else if (formValue < 0) {
+            setChangeInAmount(-inCartQuantity);
+            setFormValue(0);
+        } else if (formValue > quantity) {
+            setChangeInAmount(quantity - inCartQuantity);
+            setFormValue(quantity);
+        }
+
+        await updateCartInventory(id, -changeInAmount);
+        setAmountInCart();
+    };
+    console.log(inCartQuantity, "In Cart Quantity");
+    console.log();
 
     useEffect(() => {
         setAmountInCart();
     }, []);
 
     useEffect(() => {});
-    console.log(inCartQuantity, "inCartQunatity");
+    // console.log(inCartQuantity, "inCartQunatity");
     return (
         <section className={styles.Card}>
             <div>
@@ -59,12 +63,15 @@ const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
                 </NavLink>
             </div>
             <div>
-                <input
-                    onChange={handleChange}
-                    type="number"
-                    min={0}
-                    value={formValue}
-                />
+                <form onSubmit={handleSubmit}>
+                    <input
+                        onChange={handleChange}
+                        type="number"
+                        min={0}
+                        value={formValue}
+                    />
+                    <input type="submit" value={"update cart"} />
+                </form>
             </div>
         </section>
     );

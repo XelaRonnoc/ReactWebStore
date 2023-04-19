@@ -6,7 +6,7 @@ import { CartInventoryContext } from "../../context/CartInventoryProvider";
 const ProductCard = ({ productName, unitPrice, image, id }) => {
     const { updateCartInventory } = useContext(CartInventoryContext);
     const addToCart = () => {
-        updateCartInventory(id);
+        updateCartInventory(id, -1);
     };
     return (
         <div className={styles.ProductCard}>

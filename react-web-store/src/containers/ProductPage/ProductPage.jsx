@@ -16,7 +16,7 @@ const ProductPage = () => {
     const addToCart = async () => {
         if (product.quantity >= 1) {
             setAvailable(true);
-            await updateCartInventory(id);
+            await updateCartInventory(id, -1);
             updatePage();
         } else {
             setAvailable(false);
