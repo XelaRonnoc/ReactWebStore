@@ -45,7 +45,8 @@ const CartCard = ({ productName, unitPrice, image, id, quantity }) => {
         setAmountInCart();
     };
     console.log(inCartQuantity, "In Cart Quantity");
-    console.log();
+    console.log(changeInAmount, "Change in amount");
+    console.log(cartInventory, "Cart Inventory");
 
     useEffect(() => {
         setAmountInCart();
