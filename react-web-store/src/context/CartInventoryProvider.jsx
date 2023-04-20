@@ -15,7 +15,7 @@ const CartInventoryProvider = ({ children }) => {
         // // console.log(curQuantity);
         // if (curQuantity > incrementBy) {
         const cartHolder = cartInventory;
-        let indexToUpdate = -1;
+        let indexToUpdate = -1; // use find index of as index of does not accept a function
         for (let i = 0; i < cartHolder.length; i++) {
             if (cartHolder[i].productsObj.id === productId) {
                 indexToUpdate = i;
