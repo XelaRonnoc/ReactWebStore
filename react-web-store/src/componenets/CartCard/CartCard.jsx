@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { useEffect } from "react";
 import { getProductById } from "../../services/firebase/products";
+import { UpdateContext } from "../../context/UpdateProvider";
 
 const CartCard = ({ productName, unitPrice, image, id, update }) => {
     const { cartInventory, updateCartInventory, getItemById } =
@@ -12,6 +13,7 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
     const [formValue, setFormValue] = useState(-1);
     const [changeInAmount, setChangeInAmount] = useState(0);
     const [currentProduct, setCurrentProduct] = useState({});
+    const { updatePage } = useContext(UpdateContext);
 
     const setFormValueInitial = () => {
         const curItem = getItemById(id);
@@ -25,16 +27,26 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
         setChangeInAmount(currentChange);
     };
 
+    const handleClick = (e) => {
+        console.log("remove btn clicked");
+        const currentItem = getItemById(id);
+        setChangeInAmount(-currentItem.quantityInCart);
+        updateCartInventory(id, -currentItem.quantityInCart);
+        setFormValue(0);
+        updatePage();
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         // const currentProduct = await getProductById(id);
         const currentItem = getItemById(id);
         console.log(currentProduct.quantity, "quantity");
 
-        if (currentItem.quantityInCart + changeInAmount < 0) {
+        if (currentItem.quantityInCart + changeInAmount <= 0) {
             setChangeInAmount(-currentItem.quantityInCart);
             updateCartInventory(id, -currentItem.quantityInCart);
             setFormValue(0);
+            updatePage();
         } else if (currentProduct.quantity - formValue <= 0) {
             setChangeInAmount(currentProduct.quantity);
             setFormValue(currentProduct.quantity);
@@ -77,6 +89,7 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
                         value={formValue}
                     />
                     <input type="submit" value={"update cart"} />
+                    <button onClick={handleClick}>Remove From Cart</button>
                 </form>
             </div>
         </section>
