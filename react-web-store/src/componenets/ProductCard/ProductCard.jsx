@@ -2,6 +2,7 @@ import styles from "./ProductCard.module.scss";
 import { NavLink } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
+import { getProductById } from "../../services/firebase/products";
 
 const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
     const [updated, setUpdated] = useState(0);
@@ -13,18 +14,19 @@ const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
         setUpdated(updated + 1);
     };
 
-    const justWork = () => {
-        return getItemById(id);
-    };
-    // || quantity - getItemById(id).quantityInCart <= 0)
     useEffect(() => {
-        const inCart = justWork();
-        console.log(inCart, "inCart");
-        if (quantity <= 0 || quantity - inCart <= 0) {
-            setAvailable(false);
-        } else {
-            setAvailable(true);
-        }
+        const wrapper = async () => {
+            const data = await getProductById(id);
+            if (
+                data.quantity <= 0 ||
+                data.quantity - getItemById(id)?.quantityInCart <= 0
+            ) {
+                setAvailable(false);
+            } else {
+                setAvailable(true);
+            }
+        };
+        wrapper();
     }, [updated]);
 
     return (

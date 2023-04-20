@@ -7,7 +7,7 @@ import { UpdateContext } from "../../context/UpdateProvider";
 
 const ProductPage = () => {
     const [product, setProduct] = useState(null);
-    const { cartInventory, updateCartInventory } =
+    const { cartInventory, updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
     const { updated, updatePage } = useContext(UpdateContext);
     const { id } = useParams();
@@ -29,7 +29,15 @@ const ProductPage = () => {
         const wrapper = async () => {
             const data = await getProductById(id);
             setProduct(data);
-            setAvailable(data.quantity >= 1);
+            if (
+                data.quantity <= 0 ||
+                data.quantity - getItemById(id)?.quantityInCart <= 0
+            ) {
+                setAvailable(false);
+            } else {
+                setAvailable(true);
+            }
+            // setAvailable(data.quantity >= 1);
         };
         wrapper();
     }, []);
