@@ -10,6 +10,8 @@ import CartInventoryProvider, {
 } from "./context/CartInventoryProvider";
 import Cart from "./containers/Cart/Cart";
 import UpdateProvider, { UpdateContext } from "./context/UpdateProvider";
+import Header from "./componenets/Header/Header";
+import styles from "./App.module.scss";
 
 function App() {
     // console.log(getAllProducts());
@@ -33,21 +35,26 @@ function App() {
         <BrowserRouter>
             <CartInventoryProvider>
                 <UpdateProvider>
-                    <div className="App">
-                        <Nav />
-                        <Routes>
-                            <Route
-                                path="/"
-                                element={
-                                    <>
-                                        <Carosel products={products} />
-                                        <ProductList products={products} />
-                                    </>
-                                }
-                            />
-                            <Route path="/cart" element={<Cart />} />
-                            <Route path="/:id" element={<ProductPage />} />
-                        </Routes>
+                    <div className={styles.App}>
+                        <div className={styles.App_Header}>
+                            <Header />
+                            <Nav />
+                        </div>
+                        <div className={styles.App_Body}>
+                            <Routes>
+                                <Route
+                                    path="/"
+                                    element={
+                                        <>
+                                            <Carosel products={products} />
+                                            <ProductList products={products} />
+                                        </>
+                                    }
+                                />
+                                <Route path="/cart" element={<Cart />} />
+                                <Route path="/:id" element={<ProductPage />} />
+                            </Routes>
+                        </div>
                     </div>
                 </UpdateProvider>
             </CartInventoryProvider>

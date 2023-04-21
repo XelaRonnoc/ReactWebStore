@@ -31,10 +31,11 @@ const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
 
     return (
         <div className={styles.ProductCard}>
-            <NavLink to={`/${id}`}>
+            <NavLink className={styles.ProductCard_Link} to={`/${id}`}>
                 <img className={styles.ProductCard_Image} src={image}></img>
                 <h3>{productName}</h3>
-                <p>${unitPrice}</p>
+                <p>Price: ${unitPrice}</p>
+                {quantity > 0 ? <p>In Stock</p> : <p>Out of Stock</p>}
             </NavLink>
             <button onClick={addToCart} disabled={!available}>
                 Add to Cart

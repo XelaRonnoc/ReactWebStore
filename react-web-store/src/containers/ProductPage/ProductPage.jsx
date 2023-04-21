@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { useContext } from "react";
 import { UpdateContext } from "../../context/UpdateProvider";
+import styles from "./ProductPage.module.scss";
+import ProductCard from "../../componenets/ProductCard/ProductCard";
 
 const ProductPage = () => {
     const [product, setProduct] = useState(null);
@@ -22,8 +24,6 @@ const ProductPage = () => {
             updatePage();
         }
     };
-
-    console.log(cartInventory);
 
     useEffect(() => {
         const wrapper = async () => {
@@ -44,20 +44,55 @@ const ProductPage = () => {
 
     return (
         product && (
-            <div>
-                <img src={product.imageUrl} alt="" />
-                <h1>{product.name}</h1>
-                <p>${product.unitPrice}</p>
-                <select>
-                    <option value={product.platforms.XBox}>XBox</option>
-                    <option value={product.platforms.pc}>PC</option>
-                    <option value={product.platforms.ps5}>PS5</option>
-                </select>
-                <p>Number in Stock: {product.quantity}</p>
-                <button onClick={addToCart} disabled={!available}>
-                    Add to Cart
-                </button>
-                {!available && <p>Sorry This product is out of stock</p>}
+            <div className={styles.Product}>
+                <div className={styles.Product_Left}>
+                    <img src={product.imageUrl} alt="" />
+                    <h1>{product.name}</h1>
+                    <p>Price: ${product.unitPrice}</p>
+                    <button onClick={addToCart} disabled={!available}>
+                        Add to Cart
+                    </button>
+                </div>
+                <div className={styles.Product_Right}>
+                    <div>
+                        <label for="systemOptions">Select System: </label>
+                        <select id="systemOptions">
+                            <option value="" selected disabled hidden>
+                                Choose Your System
+                            </option>
+                            <option value={product.platforms.XBox}>XBox</option>
+                            <option value={product.platforms.pc}>PC</option>
+                            <option value={product.platforms.ps5}>PS5</option>
+                        </select>
+                    </div>
+                    <div>
+                        {available ? (
+                            <p>Number in Stock: {product.quantity}</p>
+                        ) : (
+                            <p>Sorry This product is out of stock</p>
+                        )}
+                    </div>
+                    <div>
+                        <h2>Description:</h2>
+                        <p>
+                            Lorem ipsum dolor sit, amet consectetur adipisicing
+                            elit. Modi architecto natus similique odio. Atque
+                            eius magni praesentium iure, magnam error debitis.
+                            Modi a nobis, quam iste quas quaerat est non.
+                        </p>
+                    </div>
+                    <div>
+                        {/* make a product context so I can easily access a different product from her */}
+                        <h2>You may also like: </h2>
+                        <ProductCard
+                            productName={product.name}
+                            image={product.imageUrl}
+                            unitPrice={product.unitPrice}
+                            id={product.id}
+                            quantity={product.quantity}
+                        />
+                    </div>
+                </div>
             </div>
         )
     );

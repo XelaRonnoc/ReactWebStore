@@ -5,7 +5,8 @@
     padding: 10px;
     border: 2px solid black;
     width: 200px;
-    height: 450px;
+    height: 430px;
+    border-radius: 3px;
 
     &:hover {
         box-shadow: 10px 10px 10px gray;
@@ -14,5 +15,14 @@
     &_Image {
         width: 200px;
         height: 300px;
+    }
+
+    &_Link {
+        text-decoration: none;
+        color: black;
+    }
+
+    & button {
+        padding: 7px 12px;
     }
 }
