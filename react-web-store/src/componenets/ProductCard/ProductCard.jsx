@@ -35,7 +35,7 @@ const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
                 <img className={styles.ProductCard_Image} src={image}></img>
                 <h3>{productName}</h3>
                 <p>Price: ${unitPrice}</p>
-                {quantity > 0 ? (
+                {available ? (
                     <p>In Stock</p>
                 ) : (
                     <p className="out-of-stock">Out of Stock</p>
