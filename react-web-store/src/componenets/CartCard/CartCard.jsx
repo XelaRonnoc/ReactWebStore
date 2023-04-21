@@ -74,7 +74,7 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
     // console.log(inCartQuantity, "inCartQunatity");
     return (
         <section className={styles.Card}>
-            <div>
+            <div className={styles.Card_Product}>
                 <NavLink to={`/${id}`}>
                     <img className={styles.Card_Image} src={image}></img>
                     <h3>{productName}</h3>
@@ -82,13 +82,17 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
                 </NavLink>
             </div>
             <div>
-                <form onSubmit={handleSubmit}>
+                <form className={styles.Card_Form} onSubmit={handleSubmit}>
                     <input
                         onChange={handleChange}
                         type="number"
                         value={formValue}
                     />
-                    <input type="submit" value={"update cart"} />
+                    <input
+                        className={styles.UpdateCart}
+                        type="submit"
+                        value={"update cart"}
+                    />
                     <button onClick={handleClick}>Remove From Cart</button>
                 </form>
             </div>

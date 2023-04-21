@@ -52,6 +52,15 @@ const ProductPage = () => {
                     <button onClick={addToCart} disabled={!available}>
                         Add to Cart
                     </button>
+                    <div>
+                        <h2>Description:</h2>
+                        <p>
+                            Lorem ipsum dolor sit, amet consectetur adipisicing
+                            elit. Modi architecto natus similique odio. Atque
+                            eius magni praesentium iure, magnam error debitis.
+                            Modi a nobis, quam iste quas quaerat est non.
+                        </p>
+                    </div>
                 </div>
                 <div className={styles.Product_Right}>
                     <div>
@@ -69,18 +78,12 @@ const ProductPage = () => {
                         {available ? (
                             <p>Number in Stock: {product.quantity}</p>
                         ) : (
-                            <p>Sorry This product is out of stock</p>
+                            <p className="out-of-stock">
+                                Sorry This product is out of stock
+                            </p>
                         )}
                     </div>
-                    <div>
-                        <h2>Description:</h2>
-                        <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Modi architecto natus similique odio. Atque
-                            eius magni praesentium iure, magnam error debitis.
-                            Modi a nobis, quam iste quas quaerat est non.
-                        </p>
-                    </div>
+
                     <div>
                         {/* make a product context so I can easily access a different product from her */}
                         <h2>You may also like: </h2>

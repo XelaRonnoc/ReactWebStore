@@ -9,3 +9,7 @@
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     font-weight: normal;
 }
+
+.out-of-stock {
+    color: red;
+}

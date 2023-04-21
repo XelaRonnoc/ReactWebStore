@@ -4,6 +4,7 @@ import { getAllProducts } from "../../services/firebase/products";
 import ProductCard from "../../componenets/ProductCard/ProductCard";
 import CartCard from "../../componenets/CartCard/CartCard";
 import { UpdateContext } from "../../context/UpdateProvider";
+import styles from "./Cart.module.scss";
 
 const Cart = () => {
     const [products, setProducts] = useState(null);
@@ -32,27 +33,29 @@ const Cart = () => {
     }, [cartInventory, updated]);
 
     return (
-        <div>
+        <>
             <h1>Cart</h1>
-            <div>
-                {products &&
-                    products.map((prod) => {
-                        return (
-                            <CartCard
-                                key={prod.productsObj.id}
-                                productName={prod.productsObj.name}
-                                image={prod.productsObj.imageUrl}
-                                unitPrice={prod.productsObj.unitPrice}
-                                id={prod.productsObj.id}
-                                update={updated}
-                            />
-                        );
-                    })}
+            <div className={styles.Cart}>
+                <div className={styles.Cart_Products}>
+                    {products &&
+                        products.map((prod) => {
+                            return (
+                                <CartCard
+                                    key={prod.productsObj.id}
+                                    productName={prod.productsObj.name}
+                                    image={prod.productsObj.imageUrl}
+                                    unitPrice={prod.productsObj.unitPrice}
+                                    id={prod.productsObj.id}
+                                    update={updated}
+                                />
+                            );
+                        })}
+                </div>
+                <button className={styles.Cart_Purchase} onClick={handleClick}>
+                    Purchase
+                </button>
             </div>
-            <form>
-                <button onClick={handleClick}>Purchase</button>
-            </form>
-        </div>
+        </>
     );
 };
 

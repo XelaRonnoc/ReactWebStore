@@ -35,7 +35,11 @@ const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
                 <img className={styles.ProductCard_Image} src={image}></img>
                 <h3>{productName}</h3>
                 <p>Price: ${unitPrice}</p>
-                {quantity > 0 ? <p>In Stock</p> : <p>Out of Stock</p>}
+                {quantity > 0 ? (
+                    <p>In Stock</p>
+                ) : (
+                    <p className="out-of-stock">Out of Stock</p>
+                )}
             </NavLink>
             <button onClick={addToCart} disabled={!available}>
                 Add to Cart

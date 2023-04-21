@@ -1,0 +1,25 @@
+.Cart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &_Products {
+        align-self: center;
+        display: flex;
+        flex-wrap: wrap;
+        width: 1000px;
+        gap: 30px;
+    }
+
+    &_Purchase {
+        font-size: larger;
+        align-self: center;
+        padding: 12px 17px;
+        background-color: green;
+
+        &:hover {
+            background-color: rgb(5, 194, 5);
+            cursor: pointer;
+        }
+    }
+}

@@ -1,4 +1,6 @@
 .App {
+    position: relative;
+
     &_Header {
         background-color: greenyellow;
         display: flex;
@@ -12,5 +14,6 @@
 
     &_Body {
         padding-top: 70px;
+        margin-left: 10px;
     }
 }

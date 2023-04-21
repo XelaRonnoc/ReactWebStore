@@ -1,5 +1,37 @@
 .Card {
+    display: flex;
+    gap: 5px;
+    display: flex;
+
+    &_Product {
+        padding: 5px;
+        border: 1px solid black;
+    }
     &_Image {
         width: 50px;
     }
+
+    &_Form {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        & input {
+            padding: 5px 10px;
+        }
+
+        & button {
+            padding: 5px 10px;
+            background-color: orangered;
+
+            &:hover {
+                background-color: red;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.UpdateCart {
+    cursor: pointer;
 }
