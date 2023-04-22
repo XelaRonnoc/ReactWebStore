@@ -1,0 +1,37 @@
+.Product {
+    display: flex;
+    margin: 20px;
+    gap: 50px;
+
+    & p {
+        font-size: 18px;
+    }
+
+    &_Left {
+        display: flex;
+        flex-direction: column;
+        margin-left: 50px;
+        width: 600px;
+        gap: 5px;
+        & img {
+            width: 600px;
+        }
+
+        & button {
+            padding: 7px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    }
+
+    &_Right {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 300px;
+
+        & select {
+            padding: 7px 12px;
+        }
+    }
+}

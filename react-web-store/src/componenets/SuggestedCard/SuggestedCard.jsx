@@ -1,19 +1,13 @@
-import styles from "./ProductCard.module.scss";
+import styles from "./SuggestedCard.module.scss";
 import { NavLink } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { getProductById } from "../../services/firebase/products";
 
-const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
+const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
     const [updated, setUpdated] = useState(0);
     const [available, setAvailable] = useState(true);
-    const { updateCartInventory, cartInventory, getItemById } =
-        useContext(CartInventoryContext);
-
-    const addToCart = () => {
-        updateCartInventory(id, 1);
-        setUpdated(updated + 1);
-    };
+    const { getItemById } = useContext(CartInventoryContext);
 
     useEffect(() => {
         const wrapper = async () => {
@@ -31,9 +25,9 @@ const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
     }, [updated]);
 
     return (
-        <div className={styles.ProductCard}>
-            <NavLink className={styles.ProductCard_Link} to={`/${id}`}>
-                <img className={styles.ProductCard_Image} src={image}></img>
+        <div className={styles.SuggestedCard}>
+            <NavLink className={styles.SuggestedCard_Link} to={`/${id}`}>
+                <img className={styles.SuggestedCard_Image} src={image}></img>
                 <h3>{productName}</h3>
                 <p>Price: ${unitPrice}</p>
                 {available ? (
@@ -42,11 +36,8 @@ const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
                     <p className="out-of-stock">Out of Stock</p>
                 )}
             </NavLink>
-            <button onClick={addToCart} disabled={!available}>
-                Add to Cart
-            </button>
         </div>
     );
 };
 
-export default ProductCard;
+export default SuggestedCard;

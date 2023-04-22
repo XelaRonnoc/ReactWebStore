@@ -1,8 +1,18 @@
-import React from "react";
+import { useContext, useEffect } from "react";
 import ProductCard from "../../componenets/ProductCard/ProductCard";
 import styles from "./ProductList.module.scss";
+import { UpdateContext } from "../../context/UpdateProvider";
+import { CartInventoryContext } from "../../context/CartInventoryProvider";
 
 const ProductList = ({ products }) => {
+    const { update, updatePage } = useContext(UpdateContext);
+    const { initialCartInventory } = useContext(CartInventoryContext);
+
+    useEffect(() => {
+        initialCartInventory(products);
+        console.log("setting cart inventory");
+    }, [products]);
+
     return (
         <div>
             <h1>Product List from firestore</h1>
@@ -16,6 +26,7 @@ const ProductList = ({ products }) => {
                                 image={prod.imageUrl}
                                 unitPrice={prod.unitPrice}
                                 id={prod.id}
+                                quantity={prod.quantity}
                             />
                         );
                     })}

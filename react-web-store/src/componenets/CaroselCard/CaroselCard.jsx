@@ -3,9 +3,11 @@ import styles from "./CaroselCard.module.scss";
 
 const CaroselCard = ({ width, image, id }) => {
     return (
-        <div className={styles.CaroselCard} style={{ width: width }}>
-            <img src={image}></img>
-        </div>
+        <NavLink to={`/${id}`}>
+            <div className={styles.CaroselCard} style={{ width: width }}>
+                <img src={image}></img>
+            </div>
+        </NavLink>
     );
 };
 

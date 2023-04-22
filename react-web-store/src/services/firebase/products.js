@@ -7,6 +7,8 @@ import {
     getDoc,
     updateDoc,
     increment,
+    query,
+    where,
 } from "firebase/firestore";
 import { db } from "./firebase-config.js";
 
@@ -56,6 +58,14 @@ export const getProductById = async (id) => {
     } else {
         throw new Error("Doc not found");
     }
+};
+
+export const incrementQuantity = async (id, num) => {
+    const docRef = doc(db, "video-games", id);
+    await updateDoc(docRef, {
+        quantity: increment(num),
+    });
+    return "quantity incremented";
 };
 
 // just used to create some bare documents

@@ -1,11 +1,11 @@
-.ProductCard {
+.SuggestedCard {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
     border: 2px solid black;
     width: 200px;
-    height: 430px;
+    height: 380px;
     border-radius: 3px;
 
     &:hover {
@@ -20,10 +20,5 @@
     &_Link {
         text-decoration: none;
         color: black;
-    }
-
-    & button {
-        padding: 7px 12px;
-        cursor: pointer;
     }
 }
