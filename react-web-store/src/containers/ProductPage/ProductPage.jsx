@@ -7,15 +7,23 @@ import { UpdateContext } from "../../context/UpdateProvider";
 import styles from "./ProductPage.module.scss";
 import ProductCard from "../../componenets/ProductCard/ProductCard";
 import SuggestedCard from "../../componenets/SuggestedCard/SuggestedCard";
+import { ProductContext } from "../../context/ProductProvider";
 
 const ProductPage = () => {
     const [product, setProduct] = useState(null);
-    const { cartInventory, updateCartInventory, getItemById } =
+    const { updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
     const { updated, updatePage } = useContext(UpdateContext);
     const { id } = useParams();
     const [available, setAvailable] = useState(false);
     const [system, setSystem] = useState();
+    const { products } = useContext(ProductContext);
+    const [suggestedProduct, setSuggestedProduct] = useState();
+
+    const chooseSuggestedProduct = () => {
+        const index = Math.floor(Math.random() * products.length);
+        setSuggestedProduct(products[index]);
+    };
 
     const addToCart = async () => {
         if (product.quantity >= 1) {
@@ -43,10 +51,10 @@ const ProductPage = () => {
             } else {
                 setAvailable(true);
             }
-            // setAvailable(data.quantity >= 1);
+            chooseSuggestedProduct();
         };
         wrapper();
-    }, []);
+    }, [updated]);
 
     return product ? (
         <div className={styles.Product}>
@@ -86,17 +94,19 @@ const ProductPage = () => {
                     )}
                 </div>
 
-                <div>
-                    {/* make a product context so I can easily access a different product from her */}
-                    <h2>You may also like: </h2>
-                    <SuggestedCard
-                        productName={product.name}
-                        image={product.imageUrl}
-                        unitPrice={product.unitPrice}
-                        id={product.id}
-                        quantity={product.quantity}
-                    />
-                </div>
+                {suggestedProduct && (
+                    <div>
+                        {/* make a product context so I can easily access a different product from her */}
+                        <h2>You may also like: </h2>
+                        <SuggestedCard
+                            productName={suggestedProduct.name}
+                            image={suggestedProduct.imageUrl}
+                            unitPrice={suggestedProduct.unitPrice}
+                            id={suggestedProduct.id}
+                            quantity={suggestedProduct.quantity}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     ) : (

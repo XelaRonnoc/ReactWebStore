@@ -12,19 +12,14 @@ import Cart from "./containers/Cart/Cart";
 import UpdateProvider, { UpdateContext } from "./context/UpdateProvider";
 import Header from "./componenets/Header/Header";
 import styles from "./App.module.scss";
+import ProductProvider from "./context/ProductProvider";
+import Main from "./containers/Main/Main";
 
 function App() {
     // console.log(getAllProducts());
-    const [products, setProducts] = useState(null);
     const { updated } = useContext(UpdateContext);
 
-    useEffect(() => {
-        const wrapper = async () => {
-            const allProds = await getAllProducts();
-            setProducts(allProds);
-        };
-        wrapper();
-    }, [updated]);
+    useEffect(() => {}, [updated]);
 
     // useEffect(() => {
     //     initialCartInventory(products);
@@ -33,41 +28,49 @@ function App() {
     // console.log(products);
     return (
         <BrowserRouter>
-            <CartInventoryProvider>
-                <UpdateProvider>
-                    <div className={styles.App}>
-                        <div className={styles.App_Header}>
-                            <Header />
-                            <Nav />
-                        </div>
-                        <div className={styles.App_Body}>
-                            <Routes>
-                                <Route
-                                    path="/"
-                                    element={
-                                        <>
-                                            {products ? (
-                                                <Carosel products={products} />
-                                            ) : (
-                                                <p>Loading Please Wait</p>
-                                            )}
-                                            {products ? (
-                                                <ProductList
-                                                    products={products}
-                                                />
-                                            ) : (
-                                                <p>Loading Please Wait</p>
-                                            )}
-                                        </>
-                                    }
-                                />
-                                <Route path="/cart" element={<Cart />} />
-                                <Route path="/:id" element={<ProductPage />} />
-                            </Routes>
-                        </div>
-                    </div>
-                </UpdateProvider>
-            </CartInventoryProvider>
+            <ProductProvider>
+                <CartInventoryProvider>
+                    <UpdateProvider>
+                        <Main />
+                        {/* <div className={styles.App}>
+                            <div className={styles.App_Header}>
+                                <Header />
+                                <Nav />
+                            </div>
+                            <div className={styles.App_Body}>
+                                <Routes>
+                                    <Route
+                                        path="/"
+                                        element={
+                                            <>
+                                                {products ? (
+                                                    <Carosel
+                                                        products={products}
+                                                    />
+                                                ) : (
+                                                    <p>Loading Please Wait</p>
+                                                )}
+                                                {products ? (
+                                                    <ProductList
+                                                        products={products}
+                                                    />
+                                                ) : (
+                                                    <p>Loading Please Wait</p>
+                                                )}
+                                            </>
+                                        }
+                                    />
+                                    <Route path="/cart" element={<Cart />} />
+                                    <Route
+                                        path="/:id"
+                                        element={<ProductPage />}
+                                    />
+                                </Routes>
+                            </div>
+                        </div> */}
+                    </UpdateProvider>
+                </CartInventoryProvider>
+            </ProductProvider>
         </BrowserRouter>
     );
 }

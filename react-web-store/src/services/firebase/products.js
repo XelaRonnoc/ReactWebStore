@@ -50,8 +50,8 @@ export const getProductById = async (id) => {
     const docRef = doc(db, "video-games", id);
     const docSnap = await getDoc(docRef);
 
-    console.log(docSnap.exists());
-    console.log(docSnap.data());
+    // console.log(docSnap.exists());
+    // console.log(docSnap.data());
 
     if (docSnap.exists()) {
         return { id: docSnap.id, ...docSnap.data() };

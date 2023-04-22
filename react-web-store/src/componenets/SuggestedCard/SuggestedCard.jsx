@@ -5,7 +5,7 @@ import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { getProductById } from "../../services/firebase/products";
 
 const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
-    const [updated, setUpdated] = useState(0);
+    const [updated, updatePage] = useState(0);
     const [available, setAvailable] = useState(true);
     const { getItemById } = useContext(CartInventoryContext);
 
@@ -22,7 +22,9 @@ const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
             }
         };
         wrapper();
-    }, [updated]);
+    }, []);
+
+    console.log(id);
 
     return (
         <div className={styles.SuggestedCard}>

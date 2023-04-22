@@ -20,7 +20,6 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
         setFormValue(curItem.quantityInCart);
     };
 
-    // handles the changes in amounts well up to max and min, now up to figureing out how to store and send this stuff to the DB properly without it getting too jumbled, will take some thought and refactoring
     const handleChange = (e) => {
         setFormValue(e.target.value);
         const currentChange = e.target.value - getItemById(id).quantityInCart;
@@ -28,7 +27,6 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
     };
 
     const handleClick = (e) => {
-        console.log("remove btn clicked");
         const currentItem = getItemById(id);
         setChangeInAmount(-currentItem.quantityInCart);
         updateCartInventory(id, -currentItem.quantityInCart);
@@ -37,7 +35,6 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const currentProduct = await getProductById(id);
         const currentItem = getItemById(id);
         console.log(currentProduct.quantity, "quantity");
 
@@ -57,9 +54,6 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
             updateCartInventory(id, changeInAmount);
         }
     };
-    console.log(changeInAmount, "Change in amount");
-    console.log(cartInventory, "Cart Inventory");
-    console.log(formValue, "forms current val");
 
     useEffect(() => {
         const wrapper = async () => {
@@ -69,10 +63,7 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
         setFormValueInitial();
     }, [cartInventory, update]);
 
-    console.log(getItemById(id).system);
-
     useEffect(() => {});
-    // console.log(inCartQuantity, "inCartQunatity");
     return (
         <section className={styles.Card}>
             <div className={styles.Card_Product}>

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CaroselCard from "../../componenets/CaroselCard/CaroselCard";
 import styles from "./Carosel.module.scss";
+import { ProductContext } from "../../context/ProductProvider";
 
-const Carosel = ({ products }) => {
+const Carosel = () => {
     const [items, setItems] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const { products } = useContext(ProductContext);
 
     const nextItem = () => {
         if (activeIndex < items?.length - 1) {
@@ -29,7 +31,7 @@ const Carosel = ({ products }) => {
         }
     }, [products]);
 
-    console.log(activeIndex);
+    // console.log(activeIndex);
     return (
         <div>
             <h1>Featured Products</h1>

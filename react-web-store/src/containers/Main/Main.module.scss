@@ -1,0 +1,19 @@
+.Main {
+    position: relative;
+
+    &_Header {
+        background-color: greenyellow;
+        display: flex;
+        padding: 7px 12px;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        width: 100%;
+        z-index: 999;
+    }
+
+    &_Body {
+        padding-top: 70px;
+        margin-left: 10px;
+    }
+}

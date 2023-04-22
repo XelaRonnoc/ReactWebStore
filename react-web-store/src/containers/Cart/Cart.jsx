@@ -5,10 +5,11 @@ import ProductCard from "../../componenets/ProductCard/ProductCard";
 import CartCard from "../../componenets/CartCard/CartCard";
 import { UpdateContext } from "../../context/UpdateProvider";
 import styles from "./Cart.module.scss";
+import { ProductContext } from "../../context/ProductProvider";
 
 const Cart = () => {
-    const [products, setProducts] = useState(null);
-    const { updateCartInventory, cartInventory, purchaseItemsInCart } =
+    const [productsInCart, setProductsInCart] = useState(null);
+    const { cartInventory, purchaseItemsInCart } =
         useContext(CartInventoryContext);
     const { updatePage, updated } = useContext(UpdateContext);
     const [purchased, setPurchased] = useState(false);
@@ -27,21 +28,18 @@ const Cart = () => {
                     return obj.productsObj;
                 }
             });
-            setProducts(inCart);
+            setProductsInCart(inCart);
         };
-        console.log("Cart Page refreshing");
         wrapper();
     }, [cartInventory, updated]);
-
-    console.log(products);
 
     return (
         <>
             <h1>Cart</h1>
             <div className={styles.Cart}>
                 <div className={styles.Cart_Products}>
-                    {products &&
-                        products.map((prod) => {
+                    {productsInCart &&
+                        productsInCart.map((prod) => {
                             return (
                                 <CartCard
                                     key={prod.productsObj.id}
@@ -54,7 +52,7 @@ const Cart = () => {
                             );
                         })}
                 </div>
-                {products?.length > 0 ? (
+                {productsInCart?.length > 0 ? (
                     <button
                         className={styles.Cart_Purchase}
                         onClick={handleClick}

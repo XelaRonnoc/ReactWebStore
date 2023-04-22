@@ -3,14 +3,15 @@ import ProductCard from "../../componenets/ProductCard/ProductCard";
 import styles from "./ProductList.module.scss";
 import { UpdateContext } from "../../context/UpdateProvider";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
+import { ProductContext } from "../../context/ProductProvider";
 
-const ProductList = ({ products }) => {
+const ProductList = () => {
     const { update, updatePage } = useContext(UpdateContext);
     const { initialCartInventory } = useContext(CartInventoryContext);
+    const { products } = useContext(ProductContext);
 
     useEffect(() => {
         initialCartInventory(products);
-        console.log("setting cart inventory");
     }, [products]);
 
     return (
