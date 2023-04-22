@@ -46,8 +46,18 @@ function App() {
                                     path="/"
                                     element={
                                         <>
-                                            <Carosel products={products} />
-                                            <ProductList products={products} />
+                                            {products ? (
+                                                <Carosel products={products} />
+                                            ) : (
+                                                <p>Loading Please Wait</p>
+                                            )}
+                                            {products ? (
+                                                <ProductList
+                                                    products={products}
+                                                />
+                                            ) : (
+                                                <p>Loading Please Wait</p>
+                                            )}
                                         </>
                                     }
                                 />

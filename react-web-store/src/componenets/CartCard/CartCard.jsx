@@ -88,6 +88,7 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
                     <input
                         onChange={handleChange}
                         type="number"
+                        min="1"
                         value={formValue}
                     />
                     <input
