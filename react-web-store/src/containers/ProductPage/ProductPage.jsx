@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { UpdateContext } from "../../context/UpdateProvider";
 import styles from "./ProductPage.module.scss";
 import ProductCard from "../../componenets/ProductCard/ProductCard";
+import SuggestedCard from "../../componenets/SuggestedCard/SuggestedCard";
 
 const ProductPage = () => {
     const [product, setProduct] = useState(null);
@@ -14,15 +15,20 @@ const ProductPage = () => {
     const { updated, updatePage } = useContext(UpdateContext);
     const { id } = useParams();
     const [available, setAvailable] = useState(false);
+    const [system, setSystem] = useState();
 
     const addToCart = async () => {
         if (product.quantity >= 1) {
-            const result = await updateCartInventory(id, 1);
+            const result = await updateCartInventory(id, 1, system);
             const data = await getProductById(id);
             setProduct(data);
             setAvailable(data.quantity >= 1);
             updatePage();
         }
+    };
+
+    const handleChange = (e) => {
+        setSystem(e.target.value);
     };
 
     useEffect(() => {
@@ -64,11 +70,8 @@ const ProductPage = () => {
                 </div>
                 <div className={styles.Product_Right}>
                     <div>
-                        <label for="systemOptions">Select System: </label>
-                        <select id="systemOptions">
-                            <option value="" selected disabled hidden>
-                                Choose Your System
-                            </option>
+                        <label htmlFor="systemOptions">Select System: </label>
+                        <select onChange={handleChange} id="systemOptions">
                             <option value={product.platforms.XBox}>XBox</option>
                             <option value={product.platforms.pc}>PC</option>
                             <option value={product.platforms.ps5}>PS5</option>
@@ -87,7 +90,7 @@ const ProductPage = () => {
                     <div>
                         {/* make a product context so I can easily access a different product from her */}
                         <h2>You may also like: </h2>
-                        <ProductCard
+                        <SuggestedCard
                             productName={product.name}
                             image={product.imageUrl}
                             unitPrice={product.unitPrice}

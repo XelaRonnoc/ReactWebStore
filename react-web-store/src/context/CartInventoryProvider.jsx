@@ -10,7 +10,11 @@ const CartInventoryProvider = ({ children }) => {
     const [cartInventory, setCartInventory] = useState([]);
     const [initalSetupComplete, setInitialSetupComplete] = useState(false);
 
-    const updateCartInventory = async (productId, incrementBy) => {
+    const updateCartInventory = async (
+        productId,
+        incrementBy,
+        system = "XBox"
+    ) => {
         // const curQuantity = await getProductById(productId).quantity;
         // // console.log(curQuantity);
         // if (curQuantity > incrementBy) {
@@ -23,6 +27,7 @@ const CartInventoryProvider = ({ children }) => {
             }
         }
         cartHolder[indexToUpdate].quantityInCart += incrementBy;
+        cartHolder[indexToUpdate].system = system;
         setCartInventory(cartHolder);
         // }
     };
@@ -52,7 +57,7 @@ const CartInventoryProvider = ({ children }) => {
     const initialCartInventory = (products) => {
         if (products && !initalSetupComplete) {
             const productCart = products.map((item) => {
-                return { productsObj: item, quantityInCart: 0 };
+                return { productsObj: item, quantityInCart: 0, system: "" };
             });
             setCartInventory(productCart);
             setInitialSetupComplete(true);

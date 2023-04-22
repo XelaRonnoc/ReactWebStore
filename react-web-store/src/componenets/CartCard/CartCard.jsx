@@ -70,6 +70,8 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
         setFormValueInitial();
     }, [cartInventory, update]);
 
+    console.log(getItemById(id).system);
+
     useEffect(() => {});
     // console.log(inCartQuantity, "inCartQunatity");
     return (
@@ -93,6 +95,8 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
                         type="submit"
                         value={"update cart"}
                     />
+                    <p>For: {getItemById(id).system}</p>
+
                     <button onClick={handleClick}>Remove From Cart</button>
                 </form>
             </div>

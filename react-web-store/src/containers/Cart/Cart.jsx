@@ -10,13 +10,14 @@ const Cart = () => {
     const [products, setProducts] = useState(null);
     const { updateCartInventory, cartInventory, purchaseItemsInCart } =
         useContext(CartInventoryContext);
-    // const [updated, setUpdated] = useState(0);
     const { updatePage, updated } = useContext(UpdateContext);
+    const [purchased, setPurchased] = useState(false);
 
     const handleClick = (e) => {
         e.preventDefault();
         purchaseItemsInCart();
         updatePage();
+        setPurchased(true);
     };
 
     useEffect(() => {
@@ -31,6 +32,8 @@ const Cart = () => {
         console.log("Cart Page refreshing");
         wrapper();
     }, [cartInventory, updated]);
+
+    console.log(products);
 
     return (
         <>
@@ -51,9 +54,18 @@ const Cart = () => {
                             );
                         })}
                 </div>
-                <button className={styles.Cart_Purchase} onClick={handleClick}>
-                    Purchase
-                </button>
+                {products?.length > 0 ? (
+                    <button
+                        className={styles.Cart_Purchase}
+                        onClick={handleClick}
+                    >
+                        Purchase
+                    </button>
+                ) : !purchased ? (
+                    <p>No Items Currently In Cart</p>
+                ) : (
+                    <h1>Thank You For Your Purchase!!</h1>
+                )}
             </div>
         </>
     );
