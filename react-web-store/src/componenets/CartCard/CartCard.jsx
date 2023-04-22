@@ -32,7 +32,6 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
         const currentItem = getItemById(id);
         setChangeInAmount(-currentItem.quantityInCart);
         updateCartInventory(id, -currentItem.quantityInCart);
-        setFormValue(0);
         updatePage();
     };
 
