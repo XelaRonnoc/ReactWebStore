@@ -1,13 +1,19 @@
 import styles from "./SuggestedCard.module.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { getProductById } from "../../services/firebase/products";
 
 const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
-    const [updated, updatePage] = useState(0);
     const [available, setAvailable] = useState(true);
     const { getItemById } = useContext(CartInventoryContext);
+    const navigate = useNavigate();
+
+    const handleClick = (e) => {
+        e.stopPropagation();
+        console.log(id);
+        navigate(`/${id}`);
+    };
 
     useEffect(() => {
         const wrapper = async () => {
@@ -24,11 +30,9 @@ const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
         wrapper();
     }, []);
 
-    console.log(id);
-
     return (
         <div className={styles.SuggestedCard}>
-            <NavLink className={styles.SuggestedCard_Link} to={`/${id}`}>
+            <div onClick={handleClick} className={styles.SuggestedCard_Link}>
                 <img className={styles.SuggestedCard_Image} src={image}></img>
                 <h3>{productName}</h3>
                 <p>Price: ${unitPrice}</p>
@@ -37,7 +41,7 @@ const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
                 ) : (
                     <p className="out-of-stock">Out of Stock</p>
                 )}
-            </NavLink>
+            </div>
         </div>
     );
 };

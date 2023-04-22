@@ -20,9 +20,15 @@ const ProductPage = () => {
     const { products } = useContext(ProductContext);
     const [suggestedProduct, setSuggestedProduct] = useState();
 
-    const chooseSuggestedProduct = () => {
+    const chooseSuggestedProduct = (curProd) => {
         const index = Math.floor(Math.random() * products.length);
-        setSuggestedProduct(products[index]);
+        const suggestion = products[index];
+        console.log(curProd);
+        if (suggestion.id === curProd.id) {
+            chooseSuggestedProduct(curProd);
+        } else {
+            setSuggestedProduct(suggestion);
+        }
     };
 
     const addToCart = async () => {
@@ -51,10 +57,10 @@ const ProductPage = () => {
             } else {
                 setAvailable(true);
             }
-            chooseSuggestedProduct();
+            chooseSuggestedProduct(data);
         };
         wrapper();
-    }, [updated]);
+    }, [updated, id]);
 
     return product ? (
         <div className={styles.Product}>
