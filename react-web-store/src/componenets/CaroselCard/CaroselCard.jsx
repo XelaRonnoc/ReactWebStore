@@ -24,6 +24,7 @@ const CaroselCard = ({
     return (
         // <NavLink to={!notCenter ? `/${id}` : `/`}>
         <div
+            key={Math.random()}
             className={`${styles.CaroselCard} ${
                 !notCenter ? styles.Show : styles.Dampen
             } ${next ? styles.Next : styles.Previous}`}

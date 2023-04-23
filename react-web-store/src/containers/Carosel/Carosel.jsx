@@ -60,7 +60,11 @@ const Carosel = () => {
             <h1>Featured Products</h1>
             <div className={styles.Carosel}>
                 <section
-                    className={styles.Carosel_Inner}
+                    className={`${styles.Carosel_Inner} ${
+                        direction
+                            ? styles.Carosel_Inner_Next
+                            : styles.Carosel_Inner_Previous
+                    }`}
                     // style={{ transform: `translateX(-${36}%)` }}
                 >
                     {items &&
@@ -70,7 +74,7 @@ const Carosel = () => {
                                     key={prod.id}
                                     image={prod.imageUrl}
                                     width="33%"
-                                    notCenter={index - 1}
+                                    notCenter={index - 2}
                                     nextItem={nextItem}
                                     prevItem={prevItem}
                                     next={direction}
