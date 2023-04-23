@@ -5,7 +5,7 @@ import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { useContext } from "react";
 import { UpdateContext } from "../../context/UpdateProvider";
 import styles from "./ProductPage.module.scss";
-import ProductCard from "../../componenets/ProductCard/ProductCard";
+
 import SuggestedCard from "../../componenets/SuggestedCard/SuggestedCard";
 import { ProductContext } from "../../context/ProductProvider";
 
@@ -97,7 +97,6 @@ const ProductPage = () => {
 
                 {suggestedProduct && (
                     <div>
-                        {/* make a product context so I can easily access a different product from her */}
                         <h2>You may also like: </h2>
                         <SuggestedCard
                             productName={suggestedProduct.name}

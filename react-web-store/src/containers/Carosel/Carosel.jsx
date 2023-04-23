@@ -10,18 +10,6 @@ const Carosel = () => {
     const [updateFavs, setUpdateFavs] = useState(true);
     const [direction, setDirection] = useState(true);
 
-    // const nextItem = () => {
-    //     if (activeIndex < items?.length - 1) {
-    //         setActiveIndex(activeIndex + 1);
-    //     }
-    // };
-
-    // const prevItem = () => {
-    //     if (activeIndex > 0) {
-    //         setActiveIndex(activeIndex - 1);
-    //     }
-    // };
-
     const nextItem = () => {
         const arrCopy = items;
         const frontEL = arrCopy.shift();
@@ -62,7 +50,6 @@ const Carosel = () => {
                             ? styles.Carosel_Inner_Next
                             : styles.Carosel_Inner_Previous
                     }`}
-                    // style={{ transform: `translateX(-${36}%)` }}
                 >
                     {items &&
                         items.map((prod, index) => {

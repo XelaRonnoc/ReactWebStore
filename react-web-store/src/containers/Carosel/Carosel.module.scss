@@ -9,34 +9,8 @@
     &_Inner {
         white-space: nowrap;
         transition: transform 0.3s;
-        // transform: translateX(-50%);
         display: flex;
         gap: 0px;
-        &_Next {
-            // @keyframes slideInRight {
-            //     0% {
-            //         transform: translateX(100%);
-            //     }
-            //     100% {
-            //         transform: translateX(0);
-            //     }
-            // }
-
-            // animation: 1s ease-out 0s 1 slideInRight;
-        }
-
-        &_Previous {
-            // @keyframes slideInLeft {
-            //     0% {
-            //         transform: translateX(-100%);
-            //     }
-            //     100% {
-            //         transform: translateX(0);
-            //     }
-            // }
-
-            // animation: 1s ease-out 0s 1 slideInLeft;
-        }
     }
 }
 

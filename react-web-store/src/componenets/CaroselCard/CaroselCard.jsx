@@ -1,6 +1,5 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./CaroselCard.module.scss";
-import { useEffect } from "react";
 
 const CaroselCard = ({
     width,
@@ -22,7 +21,6 @@ const CaroselCard = ({
         }
     };
     return (
-        // <NavLink to={!notCenter ? `/${id}` : `/`}>
         <div
             key={Math.random()}
             className={`${styles.CaroselCard} ${
@@ -33,7 +31,6 @@ const CaroselCard = ({
         >
             <img src={image}></img>
         </div>
-        // </NavLink>
     );
 };
 

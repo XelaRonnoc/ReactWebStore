@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import ProductList from "../ProductList/ProductList";
-import { getAllProducts, addProduct } from "../../services/firebase/products";
+import { getAllProducts } from "../../services/firebase/products";
 import { Routes, Route } from "react-router-dom";
 import Nav from "../../componenets/Nav/Nav";
 import ProductPage from "../../containers/ProductPage/ProductPage";
