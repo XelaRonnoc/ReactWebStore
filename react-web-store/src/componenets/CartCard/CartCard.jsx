@@ -88,7 +88,7 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
                     <input
                         className={styles.UpdateCart}
                         type="submit"
-                        value={"update cart"}
+                        value={"Update cart"}
                     />
                     <p>For: {getItemById(id).system}</p>
 

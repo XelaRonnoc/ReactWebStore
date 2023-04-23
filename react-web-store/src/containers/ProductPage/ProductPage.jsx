@@ -17,6 +17,7 @@ const ProductPage = () => {
     const [available, setAvailable] = useState(false);
     const [system, setSystem] = useState();
     const [suggestedProduct, setSuggestedProduct] = useState();
+    const [added, setAdded] = useState(false);
     const { updated, updatePage } = useContext(UpdateContext);
     const { products } = useContext(ProductContext);
     const { id } = useParams();
@@ -47,6 +48,7 @@ const ProductPage = () => {
     // adds the current product to cart
     const addToCart = () => {
         updateCartInventory(id, 1, system);
+        setAdded(true);
         updatePage();
     };
 
@@ -78,9 +80,13 @@ const ProductPage = () => {
                 <img src={product.imageUrl} alt="" />
                 <h1>{product.name}</h1>
                 <p>Price: ${product.unitPrice}</p>
-                <button onClick={addToCart} disabled={!available}>
-                    Add to Cart
-                </button>
+                {!added ? (
+                    <button onClick={addToCart} disabled={!available}>
+                        Add to Cart
+                    </button>
+                ) : (
+                    <p>Added To Cart!</p>
+                )}
                 <div>
                     <h2>Description:</h2>
                     <p>{product.description}</p>

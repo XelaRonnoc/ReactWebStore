@@ -3,18 +3,21 @@ import { NavLink } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { getProductById } from "../../services/firebase/products";
+import { UpdateContext } from "../../context/UpdateProvider";
 
 const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
     const [curProduct, setCurrentProduct] = useState();
-    const [updated, setUpdated] = useState(0);
+    const { updated, updatePage } = useContext(UpdateContext);
     const [available, setAvailable] = useState(true);
     const [system, setSystem] = useState();
+    const [added, setAdded] = useState(false);
     const { updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
 
     const addToCart = () => {
         updateCartInventory(id, 1, system);
-        setUpdated(updated + 1);
+        setAdded(true);
+        updatePage();
     };
 
     const handleChange = (e) => {
@@ -57,9 +60,13 @@ const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
                         <option value={curProduct.platforms.ps5}>PS5</option>
                     </select>
                 )}
-                <button onClick={addToCart} disabled={!available}>
-                    Add to Cart
-                </button>
+                {!added ? (
+                    <button onClick={addToCart} disabled={!available}>
+                        Add to Cart
+                    </button>
+                ) : (
+                    <p>Added To Cart!</p>
+                )}
             </div>
         </div>
     );
