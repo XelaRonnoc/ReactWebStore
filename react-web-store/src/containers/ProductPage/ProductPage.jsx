@@ -23,24 +23,31 @@ const ProductPage = () => {
 
     // picks a random other product that isn't the current product
     const chooseSuggestedProduct = (curProd) => {
-        const index = Math.floor(Math.random() * products.length);
-        const suggestion = products[index];
-        if (suggestion.id === curProd.id) {
-            chooseSuggestedProduct(curProd);
-        } else {
-            setSuggestedProduct(suggestion);
+        if (products) {
+            const index = Math.floor(Math.random() * products.length);
+            const suggestion = products[index];
+            if (suggestion.id === curProd.id) {
+                chooseSuggestedProduct(curProd);
+            } else {
+                setSuggestedProduct(suggestion);
+            }
         }
     };
 
+    // const addToCart = async () => {
+    //     if (product.quantity >= 1) {
+    //         const result = await updateCartInventory(id, 1, system);
+    //         const data = await getProductById(id);
+    //         setProduct(data);
+    //         setAvailable(data.quantity >= 1);
+    //         updatePage();
+    //     }
+    // };
+
     // adds the current product to cart
-    const addToCart = async () => {
-        if (product.quantity >= 1) {
-            const result = await updateCartInventory(id, 1, system);
-            const data = await getProductById(id);
-            setProduct(data);
-            setAvailable(data.quantity >= 1);
-            updatePage();
-        }
+    const addToCart = () => {
+        updateCartInventory(id, 1, system);
+        updatePage();
     };
 
     // sets the system that the user desires to purchase the game on to be displayed in cart

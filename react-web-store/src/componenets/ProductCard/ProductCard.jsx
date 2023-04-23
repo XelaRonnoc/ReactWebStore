@@ -5,14 +5,20 @@ import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { getProductById } from "../../services/firebase/products";
 
 const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
+    const [curProduct, setCurrentProduct] = useState();
     const [updated, setUpdated] = useState(0);
     const [available, setAvailable] = useState(true);
+    const [system, setSystem] = useState();
     const { updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
 
     const addToCart = () => {
-        updateCartInventory(id, 1);
+        updateCartInventory(id, 1, system);
         setUpdated(updated + 1);
+    };
+
+    const handleChange = (e) => {
+        setSystem(e.target.value);
     };
 
     useEffect(() => {
@@ -26,6 +32,7 @@ const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
             } else {
                 setAvailable(true);
             }
+            setCurrentProduct(data);
         };
         wrapper();
     }, [updated]);
@@ -42,9 +49,18 @@ const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
                     <p className="out-of-stock">Out of Stock</p>
                 )}
             </NavLink>
-            <button onClick={addToCart} disabled={!available}>
-                Add to Cart
-            </button>
+            <div className={styles.Interactable}>
+                {curProduct && (
+                    <select onChange={handleChange} id="systemOptions">
+                        <option value={curProduct.platforms.XBox}>XBox</option>
+                        <option value={curProduct.platforms.pc}>PC</option>
+                        <option value={curProduct.platforms.ps5}>PS5</option>
+                    </select>
+                )}
+                <button onClick={addToCart} disabled={!available}>
+                    Add to Cart
+                </button>
+            </div>
         </div>
     );
 };

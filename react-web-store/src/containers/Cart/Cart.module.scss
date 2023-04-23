@@ -15,10 +15,12 @@
         font-size: larger;
         align-self: center;
         padding: 12px 17px;
-        background-color: green;
-
+        background-color: #f5ed00;
+        border: 2px solid black;
+        border-radius: 3px;
+        margin-bottom: 10px;
         &:hover {
-            background-color: rgb(5, 194, 5);
+            background-color: #fff833;
             cursor: pointer;
         }
     }

@@ -70,13 +70,13 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
     useEffect(() => {});
     return (
         <section className={styles.Card}>
-            <div className={styles.Card_Product}>
-                <NavLink to={`/${id}`}>
-                    <img className={styles.Card_Image} src={image}></img>
-                    <h3>{productName}</h3>
-                    <p>${unitPrice}</p>
-                </NavLink>
-            </div>
+            {/* <div className={styles.Card_Product}> */}
+            <NavLink className={styles.Card_Product} to={`/${id}`}>
+                <img className={styles.Card_Image} src={image}></img>
+                <h3>{productName}</h3>
+                <p>${unitPrice}</p>
+            </NavLink>
+            {/* </div> */}
             <div>
                 <form className={styles.Card_Form} onSubmit={handleSubmit}>
                     <input
