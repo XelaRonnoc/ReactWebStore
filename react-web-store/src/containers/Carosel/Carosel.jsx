@@ -72,7 +72,7 @@ const Carosel = () => {
                             return (
                                 <CaroselCard
                                     key={prod.id}
-                                    image={prod.imageUrl}
+                                    image={prod.caroselImage}
                                     width="33%"
                                     notCenter={index - 2}
                                     nextItem={nextItem}

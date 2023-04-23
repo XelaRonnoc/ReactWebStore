@@ -1,11 +1,17 @@
 .Carosel {
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 
     &_Inner {
         white-space: nowrap;
         transition: transform 0.3s;
-        transform: translateX(-33%);
-
+        // transform: translateX(-50%);
+        display: flex;
+        gap: 0px;
         &_Next {
             // @keyframes slideInRight {
             //     0% {
