@@ -14,6 +14,7 @@ const Cart = () => {
     const { updatePage, updated } = useContext(UpdateContext);
     const [purchased, setPurchased] = useState(false);
 
+    // handles the purchase btn being clicked and calls the purchase method
     const handleClick = (e) => {
         e.preventDefault();
         purchaseItemsInCart();

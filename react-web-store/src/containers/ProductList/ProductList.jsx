@@ -6,7 +6,7 @@ import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { ProductContext } from "../../context/ProductProvider";
 
 const ProductList = () => {
-    const { update, updatePage } = useContext(UpdateContext);
+    //container for all product cards
     const { initialCartInventory } = useContext(CartInventoryContext);
     const { products } = useContext(ProductContext);
 

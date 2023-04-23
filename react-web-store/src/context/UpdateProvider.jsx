@@ -5,6 +5,7 @@ export const UpdateContext = createContext({
     setUpdated: () => {},
 });
 
+// allows for updates to effect other elements
 const UpdateProvider = ({ children }) => {
     const [updated, setUpdated] = useState(0);
 

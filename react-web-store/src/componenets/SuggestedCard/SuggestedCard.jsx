@@ -9,6 +9,7 @@ const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
     const { getItemById } = useContext(CartInventoryContext);
     const navigate = useNavigate();
 
+    // navigates to the product page of this product
     const handleClick = (e) => {
         e.stopPropagation();
         console.log(id);

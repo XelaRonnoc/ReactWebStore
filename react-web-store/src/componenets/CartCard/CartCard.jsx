@@ -15,17 +15,20 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
     const [currentProduct, setCurrentProduct] = useState({});
     const { updatePage } = useContext(UpdateContext);
 
+    // sets the form intput to current quantity in cart
     const setFormValueInitial = () => {
         const curItem = getItemById(id);
         setFormValue(curItem.quantityInCart);
     };
 
+    // sets the change in amount from current quantity in cart to user input
     const handleChange = (e) => {
         setFormValue(e.target.value);
         const currentChange = e.target.value - getItemById(id).quantityInCart;
         setChangeInAmount(currentChange);
     };
 
+    // removes item from cart
     const handleClick = (e) => {
         const currentItem = getItemById(id);
         setChangeInAmount(-currentItem.quantityInCart);
@@ -33,6 +36,7 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
         updatePage();
     };
 
+    // updates the amount of the item in cart, will automatically reduce to maximum allowable amount if over
     const handleSubmit = async (e) => {
         e.preventDefault();
         const currentItem = getItemById(id);

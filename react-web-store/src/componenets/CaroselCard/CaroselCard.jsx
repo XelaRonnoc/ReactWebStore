@@ -11,6 +11,8 @@ const CaroselCard = ({
     next,
 }) => {
     const navigate = useNavigate();
+    // if central car when clicked will link to that items product page,
+    // else will either move back or forward depending on position
     const handleClick = () => {
         if (notCenter > 0) {
             nextItem();

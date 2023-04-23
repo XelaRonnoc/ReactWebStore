@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Nav.module.scss";
 
+// just the nav bar
 const Nav = () => {
     return (
         <nav className={styles.Nav}>

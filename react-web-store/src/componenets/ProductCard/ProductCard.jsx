@@ -7,7 +7,7 @@ import { getProductById } from "../../services/firebase/products";
 const ProductCard = ({ productName, unitPrice, image, id, quantity }) => {
     const [updated, setUpdated] = useState(0);
     const [available, setAvailable] = useState(true);
-    const { updateCartInventory, cartInventory, getItemById } =
+    const { updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
 
     const addToCart = () => {

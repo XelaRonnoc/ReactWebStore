@@ -10,16 +10,18 @@ import SuggestedCard from "../../componenets/SuggestedCard/SuggestedCard";
 import { ProductContext } from "../../context/ProductProvider";
 
 const ProductPage = () => {
+    // individual page for each product
     const [product, setProduct] = useState(null);
     const { updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
-    const { updated, updatePage } = useContext(UpdateContext);
-    const { id } = useParams();
     const [available, setAvailable] = useState(false);
     const [system, setSystem] = useState();
-    const { products } = useContext(ProductContext);
     const [suggestedProduct, setSuggestedProduct] = useState();
+    const { updated, updatePage } = useContext(UpdateContext);
+    const { products } = useContext(ProductContext);
+    const { id } = useParams();
 
+    // picks a random other product that isn't the current product
     const chooseSuggestedProduct = (curProd) => {
         const index = Math.floor(Math.random() * products.length);
         const suggestion = products[index];
@@ -31,6 +33,7 @@ const ProductPage = () => {
         }
     };
 
+    // adds the current product to cart
     const addToCart = async () => {
         if (product.quantity >= 1) {
             const result = await updateCartInventory(id, 1, system);
@@ -41,6 +44,7 @@ const ProductPage = () => {
         }
     };
 
+    // sets the system that the user desires to purchase the game on to be displayed in cart
     const handleChange = (e) => {
         setSystem(e.target.value);
     };

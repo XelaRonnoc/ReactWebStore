@@ -6,20 +6,13 @@ const CartInventoryProvider = ({ children }) => {
     const [cartInventory, setCartInventory] = useState([]);
     const [initalSetupComplete, setInitialSetupComplete] = useState(false);
 
+    // used to update quantity of items in cart inventory does not touch db
     const updateCartInventory = async (
         productId,
         incrementBy,
         system = "XBox"
     ) => {
         const cartHolder = cartInventory;
-        // let indexToUpdate = -1; // use find index of as index of does not accept a function
-        // for (let i = 0; i < cartHolder.length; i++) {
-        //     if (cartHolder[i].productsObj.id === productId) {
-        //         indexToUpdate = i;
-        //         break;
-        //     }
-        // }
-
         const indexToUpdate = cartHolder.findIndex(
             (obj) => obj.productsObj.id === productId
         );
@@ -28,6 +21,7 @@ const CartInventoryProvider = ({ children }) => {
         setCartInventory(cartHolder);
     };
 
+    // reads the cart inventory for anything with more than 0 in quantity and then substracts this quantity from relevant items in db
     const purchaseItemsInCart = async () => {
         const itemsInCart = cartInventory.filter(
             (item) => item.quantityInCart > 0
@@ -40,6 +34,7 @@ const CartInventoryProvider = ({ children }) => {
         cartInventory.forEach((item) => (item.quantityInCart = 0));
     };
 
+    // allows for searching through cart without going back to db
     const getItemById = (id) => {
         const result = cartInventory.find((item) => {
             if (item.productsObj.id === id) {
@@ -49,6 +44,7 @@ const CartInventoryProvider = ({ children }) => {
         return result;
     };
 
+    // initialises the cart inventory with all products from db
     const initialCartInventory = (products) => {
         if (products && !initalSetupComplete) {
             const productCart = products.map((item) => {
@@ -59,6 +55,7 @@ const CartInventoryProvider = ({ children }) => {
         }
     };
 
+    // what should be sent to other components
     const data = {
         cartInventory,
         initialCartInventory,

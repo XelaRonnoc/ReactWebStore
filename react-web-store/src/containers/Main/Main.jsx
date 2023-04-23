@@ -12,6 +12,7 @@ import styles from "./Main.module.scss";
 import { ProductContext } from "../../context/ProductProvider";
 
 function Main() {
+    // holds stuff, allows for easier utilisation of context early in app mounting
     const { products, updateProducts } = useContext(ProductContext);
     const { updated } = useContext(UpdateContext);
 
