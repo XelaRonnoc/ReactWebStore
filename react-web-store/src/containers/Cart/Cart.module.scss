@@ -4,10 +4,11 @@
     gap: 20px;
 
     &_Products {
+        justify-content: center;
         align-self: center;
         display: flex;
         flex-wrap: wrap;
-        width: 1000px;
+        // width: 1000px;
         gap: 30px;
     }
 
