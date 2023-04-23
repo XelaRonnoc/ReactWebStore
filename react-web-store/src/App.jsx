@@ -26,6 +26,7 @@ function App() {
     // }, [products]);
 
     // console.log(products);
+
     return (
         <BrowserRouter>
             <ProductProvider>

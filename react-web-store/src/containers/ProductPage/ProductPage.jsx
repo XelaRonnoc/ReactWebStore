@@ -73,12 +73,7 @@ const ProductPage = () => {
                 </button>
                 <div>
                     <h2>Description:</h2>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Modi architecto natus similique odio. Atque eius
-                        magni praesentium iure, magnam error debitis. Modi a
-                        nobis, quam iste quas quaerat est non.
-                    </p>
+                    <p>{product.description}</p>
                 </div>
             </div>
             <div className={styles.Product_Right}>

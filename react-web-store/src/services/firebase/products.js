@@ -23,20 +23,6 @@ export const getAllProducts = async () => {
     return data;
 };
 
-const obj = {
-    favourited: false,
-    imageUrl:
-        "https://space4games.com/wp-content/uploads/cyberpunk-2077_cover_s4g.png.webp",
-    name: "Place Holder Name",
-    platforms: {
-        pc: "for PC",
-        ps5: "for PS5",
-        XBox: "for X-Box",
-    },
-    quantity: 20,
-    unitPrice: 59.99,
-};
-
 export const addProduct = async (someObj) => {
     // someObj should ahve title, yearReleased, director
     const docRef = await addDoc(collection(db, "video-games"), someObj);
@@ -68,7 +54,6 @@ export const incrementQuantity = async (id, num) => {
     return "quantity incremented";
 };
 
-// just used to create some bare documents
 // const obj = {
 //     favourited: false,
 //     imageUrl:
@@ -82,7 +67,4 @@ export const incrementQuantity = async (id, num) => {
 //     quantity: 20,
 //     unitPrice: 59.99,
 // };
-
-// for (let i = 0; i < 10; i++) {
-//     addProduct(obj);
-// }
+// addProduct(obj);

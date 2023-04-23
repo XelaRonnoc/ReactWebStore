@@ -23,18 +23,15 @@ const Carosel = () => {
     // };
 
     const nextItem = () => {
-        console.log("Next");
         const arrCopy = items;
         const frontEL = arrCopy.shift();
         arrCopy.push(frontEL);
-        console.log(arrCopy);
         setItems(arrCopy);
         setActiveIndex(activeIndex + 1);
         setDirection(true);
     };
 
     const prevItem = () => {
-        console.log("previous");
         const arrCopy = items;
         const backEl = arrCopy.pop();
         arrCopy.unshift(backEl);
@@ -74,7 +71,9 @@ const Carosel = () => {
                                     key={prod.id}
                                     image={prod.caroselImage}
                                     width="33%"
-                                    notCenter={index - 2}
+                                    notCenter={
+                                        index - Math.floor(items.length / 2)
+                                    }
                                     nextItem={nextItem}
                                     prevItem={prevItem}
                                     next={direction}
