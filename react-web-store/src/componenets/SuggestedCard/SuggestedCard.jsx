@@ -12,7 +12,6 @@ const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
     // navigates to the product page of this product
     const handleClick = (e) => {
         e.stopPropagation();
-        console.log(id);
         navigate(`/${id}`);
     };
 

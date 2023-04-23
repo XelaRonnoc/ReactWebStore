@@ -25,7 +25,6 @@ const ProductPage = () => {
     const chooseSuggestedProduct = (curProd) => {
         const index = Math.floor(Math.random() * products.length);
         const suggestion = products[index];
-        console.log(curProd);
         if (suggestion.id === curProd.id) {
             chooseSuggestedProduct(curProd);
         } else {

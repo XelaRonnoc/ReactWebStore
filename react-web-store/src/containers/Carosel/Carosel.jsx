@@ -10,6 +10,7 @@ const Carosel = () => {
     const [updateFavs, setUpdateFavs] = useState(true);
     const [direction, setDirection] = useState(true);
 
+    // moves carosel to the right
     const nextItem = () => {
         const arrCopy = items;
         const frontEL = arrCopy.shift();
@@ -19,6 +20,7 @@ const Carosel = () => {
         setDirection(true);
     };
 
+    // moves carosel to the left
     const prevItem = () => {
         const arrCopy = items;
         const backEl = arrCopy.pop();
@@ -69,10 +71,20 @@ const Carosel = () => {
                             );
                         })}
                 </section>
-                <div className={styles.Controls}>
-                    <button onClick={prevItem}>Previous</button>
-                    <button onClick={nextItem}>Next</button>
-                </div>
+                {/* <div className={styles.Controls}> */}
+                <button
+                    className={`${styles.Controls} ${styles.Controls_Left} `}
+                    onClick={prevItem}
+                >
+                    {"<"}
+                </button>
+                <button
+                    className={`${styles.Controls} ${styles.Controls_Right} `}
+                    onClick={nextItem}
+                >
+                    {">"}
+                </button>
+                {/* </div> */}
             </div>
         </div>
     );

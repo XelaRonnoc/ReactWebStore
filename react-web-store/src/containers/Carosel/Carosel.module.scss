@@ -1,10 +1,11 @@
 .Carosel {
     overflow: hidden;
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    position: relative;
 
     &_Inner {
         white-space: nowrap;
@@ -16,12 +17,30 @@
 
 .Controls {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    z-index: 999;
+    background-color: rgba($color: #000000, $alpha: 0);
+    border: none;
+    font-size: 64px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    opacity: 50%;
 
-    & button {
-        width: 100px;
-        padding: 7px 12px;
-        cursor: pointer;
+    &_Left {
+        position: absolute;
+        top: 50;
+        margin-right: 600px;
+        justify-self: flex-end;
+    }
+
+    &_Right {
+        position: absolute;
+        top: 50;
+        margin-left: 600px;
+        justify-self: flex-end;
+    }
+
+    &:hover {
+        opacity: 100%;
     }
 }
