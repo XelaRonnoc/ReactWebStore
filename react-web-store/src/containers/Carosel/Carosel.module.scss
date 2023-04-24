@@ -1,3 +1,5 @@
+// @use "../../mixins";
+
 @mixin medium {
     @media only screen and (max-width: (600px)) {
         @content; // this lets me leave the mixin empty and pass it new content
@@ -12,7 +14,6 @@
 .Carosel {
     overflow: hidden;
     display: flex;
-    // flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
