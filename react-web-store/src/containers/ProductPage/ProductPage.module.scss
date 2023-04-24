@@ -1,7 +1,20 @@
+@mixin medium {
+    @media only screen and (max-width: (600px)) {
+        @content; // this lets me leave the mixin empty and pass it new content
+    }
+}
+
 .Product {
     display: flex;
+    flex-wrap: wrap;
     margin: 20px;
+    margin-left: 70px;
     gap: 50px;
+
+    @include medium {
+        justify-content: center;
+        margin: 20px;
+    }
 
     & p {
         font-size: 18px;
@@ -9,13 +22,21 @@
 
     &_Left {
         display: flex;
+        flex-wrap: wrap;
         flex-direction: column;
-        margin-left: 50px;
-        width: 500px;
+        // margin-left: 50px;
+        max-width: 500px;
         gap: 5px;
+
         & img {
-            width: 500px;
-            height: 750px;
+            align-self: center;
+            max-width: 500px;
+            max-height: 750px;
+
+            @include medium() {
+                max-width: 250px;
+                max-height: 500px;
+            }
         }
 
         & button {
@@ -36,6 +57,9 @@
         flex-direction: column;
         gap: 10px;
         width: 300px;
+        @include medium {
+            justify-content: center;
+        }
 
         & select {
             padding: 7px 12px;
