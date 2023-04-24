@@ -13,6 +13,7 @@ const Cart = () => {
         useContext(CartInventoryContext);
     const { updatePage, updated } = useContext(UpdateContext);
     const [purchased, setPurchased] = useState(false);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     // handles the purchase btn being clicked and calls the purchase method
     const handleClick = (e) => {
@@ -32,6 +33,7 @@ const Cart = () => {
             setProductsInCart(inCart);
         };
         wrapper();
+        setTotalPrice(getTotalPrice());
     }, [cartInventory, updated]);
 
     return (
@@ -56,12 +58,12 @@ const Cart = () => {
                 {productsInCart?.length > 0 ? (
                     <div className={styles.Cart_Container}>
                         <h3>Cost Summary:</h3>
-                        <p>subTotal: ${getTotalPrice()}</p>
+                        <p>subTotal: ${totalPrice}</p>
                         <p>
                             GST(10%): $
-                            {Math.floor(getTotalPrice() * 0.1 * 100) / 100}
+                            {Math.floor(totalPrice * 0.1 * 100) / 100}
                         </p>
-                        <p>Total: ${getTotalPrice() + getTotalPrice() * 0.1}</p>
+                        <p>Total: ${totalPrice + totalPrice * 0.1}</p>
                         <button
                             className={styles.Cart_Container_Purchase}
                             onClick={handleClick}
