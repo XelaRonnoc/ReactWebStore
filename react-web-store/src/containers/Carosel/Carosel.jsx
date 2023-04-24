@@ -40,7 +40,7 @@ const Carosel = () => {
             setUpdateFavs(false);
             setItems(caroselItems);
         }
-    }, [products, activeIndex]);
+    }, [products]);
 
     return (
         <div>

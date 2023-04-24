@@ -1,3 +1,14 @@
+@mixin medium {
+    @media only screen and (max-width: (600px)) {
+        @content; // this lets me leave the mixin empty and pass it new content
+    }
+}
+@mixin mobile {
+    @media only screen and (max-width: (480px)) {
+        @content; // this lets me leave the mixin empty and pass it new content
+    }
+}
+
 .CaroselCard {
     display: inline-flex;
     align-items: center;
@@ -7,6 +18,13 @@
 
     & img {
         width: 600px;
+
+        @include medium() {
+            width: 400px;
+        }
+        @include mobile() {
+            width: 200px;
+        }
     }
 }
 

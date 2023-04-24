@@ -14,7 +14,7 @@ import { ProductContext } from "../../context/ProductProvider";
 function Main() {
     // holds stuff, allows for easier utilisation of context early in app mounting
     const { products, updateProducts } = useContext(ProductContext);
-    const { updated } = useContext(UpdateContext);
+    // const { updated } = useContext(UpdateContext);
 
     useEffect(() => {
         const wrapper = async () => {
@@ -22,7 +22,7 @@ function Main() {
             updateProducts(allProds);
         };
         wrapper();
-    }, [updated]);
+    }, []);
 
     return (
         <div className={styles.Main}>

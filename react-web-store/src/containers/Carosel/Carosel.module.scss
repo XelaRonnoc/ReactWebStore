@@ -1,3 +1,14 @@
+@mixin medium {
+    @media only screen and (max-width: (600px)) {
+        @content; // this lets me leave the mixin empty and pass it new content
+    }
+}
+@mixin mobile {
+    @media only screen and (max-width: (480px)) {
+        @content; // this lets me leave the mixin empty and pass it new content
+    }
+}
+
 .Carosel {
     overflow: hidden;
     display: flex;
@@ -31,6 +42,13 @@
         top: 50;
         margin-right: 600px;
         justify-self: flex-end;
+
+        @include medium() {
+            margin-right: 400px;
+        }
+        @include mobile() {
+            margin-right: 200px;
+        }
     }
 
     &_Right {
@@ -38,6 +56,13 @@
         top: 50;
         margin-left: 600px;
         justify-self: flex-end;
+
+        @include medium {
+            margin-left: 400px;
+        }
+        @include mobile() {
+            margin-right: 200px;
+        }
     }
 
     &:hover {

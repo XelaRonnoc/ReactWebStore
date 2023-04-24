@@ -6,9 +6,9 @@ import ProductProvider from "./context/ProductProvider";
 import Main from "./containers/Main/Main";
 
 function App() {
-    const { updated } = useContext(UpdateContext);
+    // const { updated } = useContext(UpdateContext);
 
-    useEffect(() => {}, [updated]);
+    useEffect(() => {}, []);
 
     return (
         <BrowserRouter>
