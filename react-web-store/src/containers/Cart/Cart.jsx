@@ -54,15 +54,21 @@ const Cart = () => {
                         })}
                 </div>
                 {productsInCart?.length > 0 ? (
-                    <>
-                        <p>Total: ${getTotalPrice()}</p>
+                    <div className={styles.Cart_Container}>
+                        <h3>Cost Summary:</h3>
+                        <p>subTotal: ${getTotalPrice()}</p>
+                        <p>
+                            GST(10%): $
+                            {Math.floor(getTotalPrice() * 0.1 * 100) / 100}
+                        </p>
+                        <p>Total: ${getTotalPrice() + getTotalPrice() * 0.1}</p>
                         <button
-                            className={styles.Cart_Purchase}
+                            className={styles.Cart_Container_Purchase}
                             onClick={handleClick}
                         >
                             Purchase
                         </button>
-                    </>
+                    </div>
                 ) : !purchased ? (
                     <p>No Items Currently In Cart</p>
                 ) : (
