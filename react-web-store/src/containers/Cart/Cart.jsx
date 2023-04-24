@@ -9,7 +9,7 @@ import { ProductContext } from "../../context/ProductProvider";
 
 const Cart = () => {
     const [productsInCart, setProductsInCart] = useState(null);
-    const { cartInventory, purchaseItemsInCart } =
+    const { cartInventory, purchaseItemsInCart, getTotalPrice } =
         useContext(CartInventoryContext);
     const { updatePage, updated } = useContext(UpdateContext);
     const [purchased, setPurchased] = useState(false);
@@ -54,12 +54,15 @@ const Cart = () => {
                         })}
                 </div>
                 {productsInCart?.length > 0 ? (
-                    <button
-                        className={styles.Cart_Purchase}
-                        onClick={handleClick}
-                    >
-                        Purchase
-                    </button>
+                    <>
+                        <p>Total: ${getTotalPrice()}</p>
+                        <button
+                            className={styles.Cart_Purchase}
+                            onClick={handleClick}
+                        >
+                            Purchase
+                        </button>
+                    </>
                 ) : !purchased ? (
                     <p>No Items Currently In Cart</p>
                 ) : (

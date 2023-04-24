@@ -57,6 +57,8 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
         } else {
             updateCartInventory(id, changeInAmount);
         }
+
+        updatePage();
     };
 
     useEffect(() => {

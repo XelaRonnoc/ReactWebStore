@@ -55,6 +55,17 @@ const CartInventoryProvider = ({ children }) => {
         }
     };
 
+    const getTotalPrice = () => {
+        const total = cartInventory.reduce((acc, item) => {
+            if (item.quantityInCart > 0) {
+                acc = acc + item.productsObj.unitPrice * item.quantityInCart;
+            }
+            return acc;
+        }, 0);
+        console.log(total);
+        return total;
+    };
+
     // what should be sent to other components
     const data = {
         cartInventory,
@@ -62,6 +73,7 @@ const CartInventoryProvider = ({ children }) => {
         updateCartInventory,
         getItemById,
         purchaseItemsInCart,
+        getTotalPrice,
     };
 
     return (
