@@ -5,7 +5,7 @@
     padding: 10px;
     border: 2px solid black;
     width: 200px;
-    height: 430px;
+    height: 450px;
     border-radius: 3px;
 
     &:hover {
@@ -25,5 +25,27 @@
     & button {
         padding: 7px 12px;
         cursor: pointer;
+        border: 2px solid black;
+        border-radius: 3px;
+
+        &:disabled {
+            opacity: 50%;
+            cursor: not-allowed;
+        }
     }
+
+    & select {
+        padding: 7px 12px;
+        text-align: left;
+        font-size: 16px;
+        border: 2px solid black;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+}
+
+.Interactable {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }

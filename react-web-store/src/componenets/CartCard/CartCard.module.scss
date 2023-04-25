@@ -1,11 +1,19 @@
 .Card {
     display: flex;
     gap: 5px;
-    display: flex;
 
     &_Product {
+        display: flex;
+        flex-wrap: wrap;
         padding: 5px;
         border: 1px solid black;
+        border-radius: 3px;
+        inline-size: 120px;
+        overflow-wrap: normal;
+        justify-content: center;
+        text-align: center;
+        color: black;
+        text-decoration: none;
     }
     &_Image {
         width: 50px;
@@ -18,14 +26,18 @@
 
         & input {
             padding: 5px 10px;
+            border: 2px solid black;
+            border-radius: 3px;
         }
 
         & button {
             padding: 5px 10px;
-            background-color: orangered;
+            background-color: #f45d01;
+            border: 2px solid black;
+            border-radius: 3px;
 
             &:hover {
-                background-color: red;
+                background-color: #fe7520;
                 cursor: pointer;
             }
         }

@@ -1,18 +1,21 @@
-// import React from "react";
+import { createContext, useState } from "react";
 
-// const ProductProvider = () => {
-//     const [updated, setUpdated] = useState(0);
+const ProductProvider = ({ children }) => {
+    const [products, setProducts] = useState();
 
-//     const updatePage = () => {
-//         setUpdated(updated + 1);
-//     };
+    // allows for global utilistion of the items in the db without always having to go back to ask db
+    const updateProducts = (prods) => {
+        setProducts(prods);
+    };
 
-//     const updateData = { updated, updatePage };
-//     return (
-//         <UpdateContext.Provider value={updateData}>
-//             {children}
-//         </UpdateContext.Provider>
-//     );
-// };
+    const data = { products, updateProducts };
+    return (
+        <ProductContext.Provider value={data}>
+            {children}
+        </ProductContext.Provider>
+    );
+};
 
-// export default ProductProvider;
+export const ProductContext = createContext();
+
+export default ProductProvider;

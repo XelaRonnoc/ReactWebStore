@@ -5,28 +5,54 @@ import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { useContext } from "react";
 import { UpdateContext } from "../../context/UpdateProvider";
 import styles from "./ProductPage.module.scss";
-import ProductCard from "../../componenets/ProductCard/ProductCard";
+
 import SuggestedCard from "../../componenets/SuggestedCard/SuggestedCard";
+import { ProductContext } from "../../context/ProductProvider";
 
 const ProductPage = () => {
+    // individual page for each product
     const [product, setProduct] = useState(null);
-    const { cartInventory, updateCartInventory, getItemById } =
+    const { updateCartInventory, getItemById } =
         useContext(CartInventoryContext);
-    const { updated, updatePage } = useContext(UpdateContext);
-    const { id } = useParams();
     const [available, setAvailable] = useState(false);
     const [system, setSystem] = useState();
+    const [suggestedProduct, setSuggestedProduct] = useState();
+    const [added, setAdded] = useState(false);
+    const { updated, updatePage } = useContext(UpdateContext);
+    const { products } = useContext(ProductContext);
+    const { id } = useParams();
 
-    const addToCart = async () => {
-        if (product.quantity >= 1) {
-            const result = await updateCartInventory(id, 1, system);
-            const data = await getProductById(id);
-            setProduct(data);
-            setAvailable(data.quantity >= 1);
-            updatePage();
+    // picks a random other product that isn't the current product
+    const chooseSuggestedProduct = (curProd) => {
+        if (products) {
+            const index = Math.floor(Math.random() * products.length);
+            const suggestion = products[index];
+            if (suggestion.id === curProd.id) {
+                chooseSuggestedProduct(curProd);
+            } else {
+                setSuggestedProduct(suggestion);
+            }
         }
     };
 
+    // const addToCart = async () => {
+    //     if (product.quantity >= 1) {
+    //         const result = await updateCartInventory(id, 1, system);
+    //         const data = await getProductById(id);
+    //         setProduct(data);
+    //         setAvailable(data.quantity >= 1);
+    //         updatePage();
+    //     }
+    // };
+
+    // adds the current product to cart
+    const addToCart = () => {
+        updateCartInventory(id, 1, system);
+        setAdded(true);
+        updatePage();
+    };
+
+    // sets the system that the user desires to purchase the game on to be displayed in cart
     const handleChange = (e) => {
         setSystem(e.target.value);
     };
@@ -43,10 +69,10 @@ const ProductPage = () => {
             } else {
                 setAvailable(true);
             }
-            // setAvailable(data.quantity >= 1);
+            chooseSuggestedProduct(data);
         };
         wrapper();
-    }, []);
+    }, [updated, id]);
 
     return product ? (
         <div className={styles.Product}>
@@ -54,17 +80,16 @@ const ProductPage = () => {
                 <img src={product.imageUrl} alt="" />
                 <h1>{product.name}</h1>
                 <p>Price: ${product.unitPrice}</p>
-                <button onClick={addToCart} disabled={!available}>
-                    Add to Cart
-                </button>
+                {!added ? (
+                    <button onClick={addToCart} disabled={!available}>
+                        Add to Cart
+                    </button>
+                ) : (
+                    <p>Added To Cart!</p>
+                )}
                 <div>
                     <h2>Description:</h2>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Modi architecto natus similique odio. Atque eius
-                        magni praesentium iure, magnam error debitis. Modi a
-                        nobis, quam iste quas quaerat est non.
-                    </p>
+                    <p>{product.description}</p>
                 </div>
             </div>
             <div className={styles.Product_Right}>
@@ -86,17 +111,18 @@ const ProductPage = () => {
                     )}
                 </div>
 
-                <div>
-                    {/* make a product context so I can easily access a different product from her */}
-                    <h2>You may also like: </h2>
-                    <SuggestedCard
-                        productName={product.name}
-                        image={product.imageUrl}
-                        unitPrice={product.unitPrice}
-                        id={product.id}
-                        quantity={product.quantity}
-                    />
-                </div>
+                {suggestedProduct && (
+                    <div>
+                        <h2>You may also like: </h2>
+                        <SuggestedCard
+                            productName={suggestedProduct.name}
+                            image={suggestedProduct.imageUrl}
+                            unitPrice={suggestedProduct.unitPrice}
+                            id={suggestedProduct.id}
+                            quantity={suggestedProduct.quantity}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     ) : (

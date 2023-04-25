@@ -4,22 +4,34 @@
     gap: 20px;
 
     &_Products {
+        justify-content: center;
         align-self: center;
         display: flex;
         flex-wrap: wrap;
-        width: 1000px;
+        // width: 1000px;
         gap: 30px;
     }
 
-    &_Purchase {
-        font-size: larger;
+    &_Container {
+        display: flex;
+        flex-direction: column;
         align-self: center;
-        padding: 12px 17px;
-        background-color: green;
+        padding: 7px 12px;
+        border: 2px solid black;
+        gap: 5px;
 
-        &:hover {
-            background-color: rgb(5, 194, 5);
-            cursor: pointer;
+        &_Purchase {
+            font-size: larger;
+            align-self: center;
+            padding: 12px 17px;
+            background-color: #f5ed00;
+            border: 2px solid black;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            &:hover {
+                background-color: #fff833;
+                cursor: pointer;
+            }
         }
     }
 }

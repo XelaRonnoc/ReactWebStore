@@ -1,19 +1,72 @@
+// @use "../../mixins";
+
+@mixin medium {
+    @media only screen and (max-width: (600px)) {
+        @content; // this lets me leave the mixin empty and pass it new content
+    }
+}
+@mixin mobile {
+    @media only screen and (max-width: (480px)) {
+        @content; // this lets me leave the mixin empty and pass it new content
+    }
+}
+
 .Carosel {
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
 
     &_Inner {
         white-space: nowrap;
         transition: transform 0.3s;
+        display: flex;
+        gap: 0px;
     }
 }
 
 .Controls {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    z-index: 999;
+    background-color: rgba($color: #000000, $alpha: 0);
+    border: none;
+    font-size: 64px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    opacity: 50%;
 
-    & button {
-        width: 100px;
-        padding: 7px 12px;
+    &_Left {
+        position: absolute;
+        top: 50;
+        margin-right: 600px;
+        justify-self: flex-end;
+
+        @include medium() {
+            margin-right: 400px;
+        }
+        @include mobile() {
+            margin-right: 200px;
+        }
+    }
+
+    &_Right {
+        position: absolute;
+        top: 50;
+        margin-left: 600px;
+        justify-self: flex-end;
+
+        @include medium {
+            margin-left: 400px;
+        }
+        @include mobile() {
+            margin-right: 200px;
+        }
+    }
+
+    &:hover {
+        opacity: 100%;
     }
 }

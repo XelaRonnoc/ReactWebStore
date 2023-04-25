@@ -1,0 +1,21 @@
+.Main {
+    position: relative;
+
+    &_Header {
+        background-color: #fff70a;
+        display: flex;
+        padding: 7px 12px;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        width: 100%;
+        z-index: 999;
+    }
+
+    &_Body {
+        display: flex;
+        flex-direction: column;
+        padding-top: 70px;
+        margin-left: 10px;
+    }
+}

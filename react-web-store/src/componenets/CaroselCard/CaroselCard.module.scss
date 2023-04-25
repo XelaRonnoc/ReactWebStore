@@ -1,8 +1,65 @@
+// @use "../../mixins";
+
+@mixin medium {
+    @media only screen and (max-width: (600px)) {
+        @content; // this lets me leave the mixin empty and pass it new content
+    }
+}
+@mixin mobile {
+    @media only screen and (max-width: (480px)) {
+        @content; // this lets me leave the mixin empty and pass it new content
+    }
+}
+
 .CaroselCard {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 200px;
-    // background-color: green;
-    // color: aliceblue;
+    cursor: pointer;
+    position: relative;
+
+    & img {
+        width: 600px;
+
+        @include medium() {
+            width: 400px;
+        }
+        @include mobile() {
+            width: 200px;
+        }
+    }
+}
+
+.Next {
+    @keyframes slideInRight {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    animation: 1s ease-out 0s 1 slideInRight;
+}
+
+.Previous {
+    @keyframes slideInLeft {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    animation: 1s ease-out 0s 1 slideInLeft;
+}
+
+.Show {
+    opacity: 100%;
+}
+
+.Dampen {
+    opacity: 50%;
 }

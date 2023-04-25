@@ -15,29 +15,30 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
     const [currentProduct, setCurrentProduct] = useState({});
     const { updatePage } = useContext(UpdateContext);
 
+    // sets the form intput to current quantity in cart
     const setFormValueInitial = () => {
         const curItem = getItemById(id);
         setFormValue(curItem.quantityInCart);
     };
 
-    // handles the changes in amounts well up to max and min, now up to figureing out how to store and send this stuff to the DB properly without it getting too jumbled, will take some thought and refactoring
+    // sets the change in amount from current quantity in cart to user input
     const handleChange = (e) => {
         setFormValue(e.target.value);
         const currentChange = e.target.value - getItemById(id).quantityInCart;
         setChangeInAmount(currentChange);
     };
 
+    // removes item from cart
     const handleClick = (e) => {
-        console.log("remove btn clicked");
         const currentItem = getItemById(id);
         setChangeInAmount(-currentItem.quantityInCart);
         updateCartInventory(id, -currentItem.quantityInCart);
         updatePage();
     };
 
+    // updates the amount of the item in cart, will automatically reduce to maximum allowable amount if over
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const currentProduct = await getProductById(id);
         const currentItem = getItemById(id);
         console.log(currentProduct.quantity, "quantity");
 
@@ -56,10 +57,9 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
         } else {
             updateCartInventory(id, changeInAmount);
         }
+
+        updatePage();
     };
-    console.log(changeInAmount, "Change in amount");
-    console.log(cartInventory, "Cart Inventory");
-    console.log(formValue, "forms current val");
 
     useEffect(() => {
         const wrapper = async () => {
@@ -69,19 +69,16 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
         setFormValueInitial();
     }, [cartInventory, update]);
 
-    console.log(getItemById(id).system);
-
     useEffect(() => {});
-    // console.log(inCartQuantity, "inCartQunatity");
     return (
         <section className={styles.Card}>
-            <div className={styles.Card_Product}>
-                <NavLink to={`/${id}`}>
-                    <img className={styles.Card_Image} src={image}></img>
-                    <h3>{productName}</h3>
-                    <p>${unitPrice}</p>
-                </NavLink>
-            </div>
+            {/* <div className={styles.Card_Product}> */}
+            <NavLink className={styles.Card_Product} to={`/${id}`}>
+                <img className={styles.Card_Image} src={image}></img>
+                <h3>{productName}</h3>
+                <p>${unitPrice}</p>
+            </NavLink>
+            {/* </div> */}
             <div>
                 <form className={styles.Card_Form} onSubmit={handleSubmit}>
                     <input
@@ -93,7 +90,7 @@ const CartCard = ({ productName, unitPrice, image, id, update }) => {
                     <input
                         className={styles.UpdateCart}
                         type="submit"
-                        value={"update cart"}
+                        value={"Update cart"}
                     />
                     <p>For: {getItemById(id).system}</p>
 
