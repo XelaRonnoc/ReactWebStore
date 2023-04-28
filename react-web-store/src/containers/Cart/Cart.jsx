@@ -63,7 +63,11 @@ const Cart = () => {
                             GST(10%): $
                             {Math.floor(totalPrice * 0.1 * 100) / 100}
                         </p>
-                        <p>Total: ${totalPrice + totalPrice * 0.1}</p>
+                        <p>
+                            Total: $
+                            {Math.floor(totalPrice + totalPrice * 0.1 * 100) /
+                                100}
+                        </p>
                         <button
                             className={styles.Cart_Container_Purchase}
                             onClick={handleClick}
