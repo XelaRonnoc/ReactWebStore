@@ -120,6 +120,7 @@ const ProductPage = () => {
                             unitPrice={suggestedProduct.unitPrice}
                             id={suggestedProduct.id}
                             quantity={suggestedProduct.quantity}
+                            setAdded={setAdded}
                         />
                     </div>
                 )}

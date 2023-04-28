@@ -4,7 +4,14 @@ import { useContext, useEffect, useState } from "react";
 import { CartInventoryContext } from "../../context/CartInventoryProvider";
 import { getProductById } from "../../services/firebase/products";
 
-const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
+const SuggestedCard = ({
+    productName,
+    unitPrice,
+    image,
+    id,
+    quantity,
+    setAdded,
+}) => {
     const [available, setAvailable] = useState(true);
     const { getItemById } = useContext(CartInventoryContext);
     const navigate = useNavigate();
@@ -12,6 +19,7 @@ const SuggestedCard = ({ productName, unitPrice, image, id, quantity }) => {
     // navigates to the product page of this product
     const handleClick = (e) => {
         e.stopPropagation();
+        setAdded(false);
         navigate(`/${id}`);
     };
 
