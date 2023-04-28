@@ -33,6 +33,23 @@ function Main() {
             <div className={styles.Main_Body}>
                 <Routes>
                     <Route
+                        path="/ReactWebStore"
+                        element={
+                            <>
+                                {products ? (
+                                    <Carosel />
+                                ) : (
+                                    <p>Loading Please Wait</p>
+                                )}
+                                {products ? (
+                                    <ProductList />
+                                ) : (
+                                    <p>Loading Please Wait</p>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
                         path="/"
                         element={
                             <>
