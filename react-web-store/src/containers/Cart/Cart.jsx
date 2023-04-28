@@ -65,7 +65,7 @@ const Cart = () => {
                         </p>
                         <p>
                             Total: $
-                            {Math.floor(totalPrice + totalPrice * 0.1 * 100) /
+                            {Math.floor((totalPrice + totalPrice * 0.1) * 100) /
                                 100}
                         </p>
                         <button
