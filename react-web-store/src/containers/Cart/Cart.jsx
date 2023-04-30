@@ -58,7 +58,7 @@ const Cart = () => {
                 {productsInCart?.length > 0 ? (
                     <div className={styles.Cart_Container}>
                         <h3>Cost Summary:</h3>
-                        <p>subTotal: ${totalPrice}</p>
+                        <p>subTotal: ${Math.floor(totalPrice * 100) / 100}</p>
                         <p>
                             GST(10%): $
                             {Math.floor(totalPrice * 0.1 * 100) / 100}
