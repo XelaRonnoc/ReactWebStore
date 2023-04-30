@@ -4,17 +4,19 @@
 
     &_Product {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+        // flex-wrap: wrap;
         padding: 5px;
         border: 1px solid black;
         border-radius: 3px;
         inline-size: 120px;
         overflow-wrap: normal;
-        justify-content: center;
+        align-items: center;
+        justify-content: space-around;
         text-align: center;
         color: black;
         text-decoration: none;
-        width: 100px;
+        width: 130px;
     }
     &_Image {
         width: 50px;
