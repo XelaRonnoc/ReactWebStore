@@ -49,7 +49,7 @@ function Main() {
                             </>
                         }
                     />
-                    <Route
+                    {/* <Route
                         path="/"
                         element={
                             <>
@@ -65,9 +65,12 @@ function Main() {
                                 )}
                             </>
                         }
+                    /> */}
+                    <Route path="/ReactWebStore/cart" element={<Cart />} />
+                    <Route
+                        path="/ReactWebStore/:id"
+                        element={<ProductPage />}
                     />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/:id" element={<ProductPage />} />
                 </Routes>
             </div>
         </div>

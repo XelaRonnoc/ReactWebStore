@@ -19,7 +19,7 @@ const CaroselCard = ({
         } else if (notCenter < 0) {
             prevItem();
         } else {
-            navigate(`/${id}`);
+            navigate(`/ReactWebStore/${id}`);
         }
     };
     return (

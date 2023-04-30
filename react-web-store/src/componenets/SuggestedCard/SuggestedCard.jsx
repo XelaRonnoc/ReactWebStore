@@ -20,7 +20,7 @@ const SuggestedCard = ({
     const handleClick = (e) => {
         e.stopPropagation();
         setAdded(false);
-        navigate(`/${id}`);
+        navigate(`/ReactWebStore/${id}`);
     };
 
     useEffect(() => {

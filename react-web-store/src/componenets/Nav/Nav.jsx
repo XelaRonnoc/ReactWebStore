@@ -5,10 +5,10 @@ import styles from "./Nav.module.scss";
 const Nav = () => {
     return (
         <nav className={styles.Nav}>
-            <NavLink className={styles.Nav_Link} to="/">
+            <NavLink className={styles.Nav_Link} to="/ReactWebStore">
                 Home
             </NavLink>
-            <NavLink className={styles.Nav_Link} to="/cart">
+            <NavLink className={styles.Nav_Link} to="/ReactWebStore/cart">
                 Cart
             </NavLink>
         </nav>
