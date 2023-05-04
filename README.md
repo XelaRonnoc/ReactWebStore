@@ -4,3 +4,7 @@ A small video game e-commerce site that pulls information from a firestore datab
   - individual product pages
   - suggested product cards
   - Selectable game system type (i.e. XBox)
+  
+  To Do:
+  - fix how add to cart feedback works
+  - make it so there is one update cart button for the whole cart not each individual product
